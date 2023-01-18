@@ -52,7 +52,7 @@ Route::get('/showcart',[App\Http\Controllers\CartController::class, 'ShowuserCar
 
 Route::get('/addproduct',  [App\Http\Controllers\BrandController::class, 'ViewBrand'])->name('showbrand');
 
-// Auth::routes();
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
