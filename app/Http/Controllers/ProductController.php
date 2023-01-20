@@ -86,7 +86,7 @@ class ProductController extends Controller
         $product=Product::find($id);
         return view('editproduct')->with('product',$product);
     }
-
+    
     public function EditProduct(Request $request, $id){
        $request->validate([
         'watch_price'=>'numeric'
