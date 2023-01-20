@@ -191,9 +191,11 @@ session_start();
                                 </a>
                             </li>
                             <li class="col-sm mt-sm-1 offset-sm-1">
-                                <a href="adminlogout.php" style="color:white;font-size:
-             1.1vw!important;" class="btn btn-outline-danger btn-sm"><b>Logout</b>
+                                <a href="{{ route('logout') }}" style="color:white;font-size:1.1vw!important;" id="logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="btn btn-outline-danger btn-sm"><b>Logout</b>
                                 </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
                     </div>

@@ -3,7 +3,7 @@
 @section('title','Watch Info |')
 @section('content')
 <div class="container-fluid-sm">
-    <div class="row  text-center">
+    <div class="row text-center">
         <div>
 
         </div>
