@@ -1,11 +1,7 @@
 @extends('layouts.mylayout')
 
+
 @section('content')
-<?php
-$homepage = "Home";
-
-
-?>
 <div class="row " style="justify-content:center;background-color: rgba(5, 12, 36, 0.7);z-index:-1">
   <div class="col-sm-12">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -35,49 +31,45 @@ $homepage = "Home";
 <div class="mt-sm-5 mb-sm-5 text-center">
   <h3>OUR COLLECTIONS</h3>
   <hr>
-
-
 </div>
 <div class="container-fluid-sm m-sm-3">
 
-
+  @if ($brands->count() > 0) 
+    @foreach ($brands as $brand) 
   <div class="row">
-    <div class="col-sm mb-sm-5 mt-sm-1 text-center">
-      <div style="margin-left:50px;position:relative; ">
-        <img src="<?php
-                  // {{$val->brandimg}} 
-                  ?>" alt="" width="110" class="img-fluid">
+        <div class="col-sm mb-sm-5 mt-sm-1 text-center">
+          <div style="margin-left:50px;position:relative; ">
+            <img src="{{$brand->brandimg}}" alt="" width="110" class="img-fluid">
+
+          </div>
+          <hr>
+        </div>
 
       </div>
-      <hr>
-    </div>
-
-  </div>
 
 
+      <div class="row">
+        
+        @foreach ($brand->products as $product) 
+        
+          <div class="col-sm-3 mb-sm-5 ">
+            <form action="/index_watchspec/{{$product->id}}" method='GET' style="text-align: center;">
+              <img src="{{$product->watch_image}}" alt="" class="img-fluid">
 
-  <div class="row">
-    @foreach($products as $value)
+              <div style="text-align: center;font-size: 1vw;color:rgba(0, 5, 0,0.6);" class="mb-sm-2">
+                <b>{{$product->watch_description}}</b>
+              </div>
+              <input type="submit" value="{{$product->watch_name}}" class="btn btn-sm col-sm-10" style="background-color: #050C24;color:burlywood;font-size: 1.2vw;" name="btnsubmit">
+              <br>
+              
+            </form>
+          </div>
 
-    <div class="col-sm-3 mb-sm-5 ">
-      <form action="/index_watchspec/{{$value->id}}" method='GET' style="text-align: center;">
-        @csrf
-        <img src="{{$value->watch_image}}" alt="" class="img-fluid">
+         @endforeach 
 
-        <div style="text-align: center;font-size: 1vw;color:rgba(0, 5, 0,0.6);" class="mb-sm-2">
-          <b>{{$value->watch_description}}</b>
-        </div>
-        <input type="submit" value="{{$value->watch_name}}" class="btn btn-sm col-sm-10" style="background-color: #050C24;color:burlywood;font-size: 1.2vw;" name="btnsubmit">
-        <br>
-      </form>
-    </div>
+      </div>
+
     @endforeach
-
-
-
-  </div>
-
-
-
+  @endif 
 </div>
 @endsection

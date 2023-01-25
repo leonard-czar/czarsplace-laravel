@@ -37,7 +37,7 @@
 
 
             <ul style="list-style-type:square ;font-family: czars2;" class="mb-sm-5">
-                <li>Brand: </li>
+                <li>Brand: {{$product->brand['brandname']}}</li>
                 <li>Collection: {{$product->collection}}</li>
                 <li>Reference Number: {{$product->reference_number}}</li>
                 <li>Gender: {{$product->gender}}</li>

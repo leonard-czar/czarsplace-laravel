@@ -10,26 +10,20 @@
     <div class="row">
         <div class="col-sm-6">
             <div>
-                
-                    <img src="{{asset($product->watch_image)}}" alt="" class="img-fluid">
+
+                <img src="{{asset($product->watch_image)}}" alt="" class="img-fluid">
             </div>
         </div>
         <div class="col-sm-4 mt-sm-3">
             <h4 style="font-family: czars2;">{{$product->watch_description}}</h4>
             <div style="color:rgba(0, 0, 0,0.8);" class="mb-sm-4">&#8358;{{$product->watch_price}}</div>
-            <form action="" method="post">
-                <input type="hidden" value="" name="productprice">
-                <input type="hidden" value="{{$product->watch_image}}" name="productimg">
-                <input type="hidden" value="" name="productdesc">
-                <input type="submit" name="buynow" id="addcart" style="border: 1px solid #fbd079; color:black;
+
+                <input  onclick="location.href = '/login';" name="buynow" id="addcart" style="border: 1px solid #fbd079; color:black;
  background-color:#fbd079;font-weight:500px" value="BUY NOW" class="btn form-control mb-sm-5 mt-sm-1">
-
-            </form>
+            
             <h5 style="font-family: czars2;  ">WATCH SPECIFICATIONS</h5>
-
-
             <ul style="list-style-type:square ;font-family: czars2;" class="mb-sm-5">
-                <li>Brand: </li>
+                <li>Brand: {{$product->brand['brandname']}}  </li>
                 <li>Collection: {{$product->collection}}</li>
                 <li>Reference Number: {{$product->reference_number}}</li>
                 <li>Gender: {{$product->gender}}</li>

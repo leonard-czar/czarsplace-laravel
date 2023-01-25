@@ -12,8 +12,8 @@ class CartController extends Controller
 {
     //
 
-    public function Insertcart(Request $request){
-        $validated=$request->validate([
+    public function insertCart(Request $request){
+        $request->validate([
             'qty'=>['required', 'gte:1'],
          ],[
                 'qty.required'=>'please enter a valid quantity',
@@ -35,19 +35,39 @@ class CartController extends Controller
             $cart->qty=$request->input('qty');
             $cart->price=$request->input('price');
             $cart->total=$newqty*$newprice;
-            $cart->customer_id=$userid;
+            $cart->user_id=$userid;
             $cart->product_id=$request->input('watchid');
             $cart->save();
-            return back()->with('success','Item added to cart successfully!');
+            return back()->with('success',"Item added to cart successfully!
+             Click on the cart icon to view cart item(s)");
          }
 
        
     }
-    public function ShowuserCart(){
-        $user=Auth::id();
-        $carts=Cart::where('customer_id',$user)->get();
-        return view('layouts.portal')->with('carts',$carts);
+    public function showUserCart(){
+        $carts=Cart::where('user_id',auth()->id())->get();
+        return view('cart')->with('carts',$carts);
     }
+    public function cartCount(){
+        
+
+    }
+    public function deleteCart(){
+        Cart::where('user_id', auth()->id())->delete();
+        return back();        
+    }
+
+    public function deleteCartItem($id){
+        $cart = Cart::find($id);
+        if($cart){
+            $cart->delete();
+            return back();
+        }
+        else{
+            
+        }
+    }
+    
 
 
 }

@@ -148,7 +148,7 @@ session_start();
         <div>
             <div class="row " style="border-bottom: 1px solid ;background-color: #050C24;padding-bottom:30px;padding-left:22px;">
                 <div class="col-sm mt-sm-1 pt-sm-2" style="color:rgba(255, 255, 255);">
-                    <a href="admindashboard.php" id="brandname">
+                    <a href="/admindashboard" id="brandname">
                         <h1 class="text-center">
                         {{config('app.name',"Czar's Place")}}
                         </h1>
@@ -166,7 +166,7 @@ session_start();
                     <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         <ul class="navbar-nav mb-sm-2 col-sm">
                             <li class="nav-item col-sm-2" style="padding-left: 10px;">
-                                <a class="nav-link " href="admindashboard.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                                <a class="nav-link " href="{{url('/admindashboard')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b> Dashboard</b>
                                 </a>
                             </li>
@@ -181,12 +181,12 @@ session_start();
                                 </a>
                             </li>
                             <li class="nav-item col-sm-2" style="padding-left: 10px;">
-                                <a class="nav-link " href="allorders.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                                <a class="nav-link " href="/allorders" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b> All Orders</b>
                                 </a>
                             </li>
                             <li class="nav-item col-sm-2" style="padding-left: 10px;">
-                                <a class="nav-link " href="allcustomers.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                                <a class="nav-link " href="/allusers" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b>Customers</b>
                                 </a>
                             </li>

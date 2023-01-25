@@ -1,4 +1,4 @@
-@extends('layouts.mylayout')
+@extends('layouts.portal')
 
 @section('content')
 <div class="mt-sm-5 mb-sm-5 text-center">
@@ -15,7 +15,7 @@
       <img src="{{$product->watch_image}}" alt="" class="img-fluid">
       <div style="text-align: center;font-size: 1vw;color:rgba(0, 0, 0,0.6);"><b>{{$product->watch_description}}</b></div>
       <p class="price">
-      <form action="/index_watchspec/{{$product->id}}" method="GET" style="text-align: center;">
+      <form action="/watchspec/{{$product->id}}" method="GET" style="text-align: center;">
         @csrf
         <input type="submit" value="{{$product->watch_name}}" class="btn btn-sm col-sm-10 " style="background-color: #050C24;color:burlywood;font-size: 1.2vw;" name="btnsubmit">
       </form>

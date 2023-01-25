@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BrandController extends Controller
 {
     //
-    public function Insertbrand(Request $request){
+    public function insertBrand(Request $request){
         //validate using inbluit function validate()
         $validated=$request->validate([
             'brand_name'=>'required',
@@ -31,20 +32,34 @@ class BrandController extends Controller
         // return view('index')->with('brands',$brands);
     }
 
-    public function ViewIt(){
+    public function viewIt(){
         $brands=Brand::all();
         return view('allbrands')->with('brands',$brands);
     }
 
-    public function ViewBrand(){
+    public function viewBrand(){
         $brands=Brand::all();
         return view('addproduct')->with('brands',$brands);
     }
-    public function GetBrandToEdit($id){
+
+    public function showIndexBrands(){
+        $brands=Brand::all();
+        return view('index_displaybrands')->with('brands',$brands);
+    }
+
+    public function showBrands(){
+        $brands=Brand::all();
+        return view('displaybrands')->with('brands',$brands);
+    }
+    public function showBrandToAudemars(){
+        $brands= DB::table('brands')->where('id',3)->get();
+        return view('index_audemars')->with('brands',$brands);
+    }
+    public function getBrandToEdit($id){
         $brand=Brand::find($id);
         return view('editbrand')->with('brand',$brand);
     }
-    public function EditBrand(Request $request, $id){
+    public function editBrand(Request $request, $id){
         $request->validate([
          'brandname'=>'required'
         ]);
@@ -59,7 +74,7 @@ class BrandController extends Controller
          return redirect('allbrands')->with('success','Brand was updated successfully!');
      }
 
-     public function DeleteBrand($id){
+     public function deleteBrand($id){
         $brand=Brand::find($id);
         $brand->delete();
         return redirect()->action([BrandController::class,'ViewIt']);

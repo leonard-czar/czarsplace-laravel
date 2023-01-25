@@ -139,7 +139,7 @@ ob_start();
                     </a>
                 </div>
                 <div class="col-sm pt-sm-3 ">
-                    <form class="d-sm-flex bd-highlight" method="post" action="redirect.php"  style="justify-content:flex-end;">
+                    <form class="d-sm-flex bd-highlight" method="post" action="/redirect"  style="justify-content:flex-end;">
                         <input class=" me-1" type="text" name="searchbox" placeholder="Search" aria-label="Search" id="inputs">
                         <button class="btn btn-outline-success btn-sm" type="submit" name="btnsearch">
                             Search
@@ -163,17 +163,17 @@ ob_start();
                                 </a>
                             </li>
                             <li class="nav-item  col-sm-1" style="">
-                                <a class="nav-link " href="displaybrands.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                                <a class="nav-link " href="{{ url('/displaybrands')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b>BRANDS</b>
                                 </a>
                             </li>
                             <li class="nav-item  col-sm-2" style="">
-                                <a class="nav-link " href="malewatches.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                                <a class="nav-link " href="{{url('/malewatches')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b>MEN COLLECTIONS</b>
                                 </a>
                             </li>
                             <li class="nav-item  col-sm-2" style="">
-                                <a class="nav-link " href="femalewatches.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                                <a class="nav-link " href="{{url('/femalewatches')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b>LADIES COLLECTIONS</b>
                                 </a>
                             </li>
@@ -194,9 +194,8 @@ ob_start();
                                     <button type="sumbit" class="btn btn-sm btn-outline-dark" name="cart">
                                         <i class="fa-solid fa-cart-shopping text-light" style="font-size: 1rem!important;"></i> <span class="badge
                                         @isset($carts)
-                                         @if ($carts->isNotEmpty())
-                                          {{ 'bg-success' }}
-                                        
+                                         @if ($carts->count()>0)
+                                          {{ 'bg-success' }}                                        
                                             @else
                                             @endif
                                             @endisset
@@ -324,7 +323,7 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" language="javascript">
         function validateDelete(e) {
-            var response = confirm('Are you sure you want to clear cart?');
+            var response = confirm('Are you sure you want to clear all items in cart?');
             if (response == true) {
                 return true;
             } else {

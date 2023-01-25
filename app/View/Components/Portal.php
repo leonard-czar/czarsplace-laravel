@@ -1,7 +1,7 @@
 <?php
 
 namespace App\View\Components;
-
+use App\Models\Cart;
 use Illuminate\View\Component;
 
 class Portal extends Component
@@ -11,9 +11,11 @@ class Portal extends Component
      *
      * @return void
      */
+    
     public function __construct()
     {
         //
+       
     }
 
     /**
@@ -23,6 +25,10 @@ class Portal extends Component
      */
     public function render()
     {
-        return view('layouts.portal');
+        if(auth()->check()) {
+            $cartCount = Cart::where('user_id', auth()->id())->count();
+            return view('layouts.portal',['cartCount'=>$cartCount]);
+        }
+       
     }
 }

@@ -16,7 +16,7 @@ ob_start();
   <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicon_io/favicon-32x32.png')}}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon_io/favicon-16x16.png')}}">
   <link rel="manifest" href="{{asset('favicon_io/site.webmanifest')}}">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js">
   <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.css')}}">
   <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
   <title> @yield('title') {{config('app.name',"Czar's Place")}} Haven for luxury wristwatches</title>
@@ -136,8 +136,9 @@ ob_start();
           </a>
         </div>
         <div class="col-sm offset-sm-5 pt-sm-3 ">
-          <form class="d-flex  flex-grow-1 bd-highlight" method="post" action="index_redirect.php">
-            <input class=" me-1" type="text" name="searchbox" placeholder="Search" aria-label="Search" id="inputs">
+          <form class="d-flex  flex-grow-1 bd-highlight" method="POST" action="/index_redirect">
+            @csrf
+            <input class=" me-1" type="text" name="isearchbox" placeholder="Search" aria-label="Search" id="inputs">
             <button class="btn btn-outline-success btn-sm" type="submit" name="btnsearch">
               Search
             </button>
@@ -160,17 +161,17 @@ ob_start();
                 </a>
               </li>
               <li class="nav-item col-sm" style="padding-left: 10px;">
-                <a class="nav-link " href="index_displaybrands.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                <a class="nav-link " href="{{ url('/index_displaybrands')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                   <b> BRANDS </b>
                 </a>
               </li>
               <li class="nav-item col-sm-2" style="padding-left: 10px;">
-                <a class="nav-link " href="index_malewatches.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                <a class="nav-link " href="{{url('/index_malewatches')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                   <b> MEN COLLECTIONS</b>
                 </a>
               </li>
               <li class="nav-item col-sm-2" style="padding-left: 10px;">
-                <a class="nav-link " href="index_femalewatches.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                <a class="nav-link " href="{{ url('/index_femalewatches')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                   <b> LADIES COLLECTIONS</b>
                 </a>
               </li>

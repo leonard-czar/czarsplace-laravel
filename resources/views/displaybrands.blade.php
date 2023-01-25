@@ -1,4 +1,4 @@
-@extends('layouts.mylayout')
+@extends('layouts.portal')
 
 @section('content')
 
@@ -14,13 +14,13 @@
     </div>
 
     <a href="@if($val->id==1) 
-           {{url('/index_hublot')}}
+           {{url('/hublot')}}
            @endif
           @if($val->id==2) 
-          {{url('/index_rolex')}}
+          {{url('/rolex')}}
             @endif
            @if($val->id==3) 
-           {{url('/index_audemars')}}
+           {{url('/audemars')}}
              @endif" class="btn btn-outline-primary btn-sm col-7">View
       {{$val->brandname}}
     </a>

@@ -38,6 +38,18 @@
 
 @endif
 
+@if ($message = Session::get('failed'))
+
+<div class="alert alert-danger alert-dismissible fade show text-center" role="alert" style="font-family: czars2;">
+
+  <strong>{{ $message }}</strong>
+
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" aria-hidden="true"></button>
+
+</div>
+
+@endif
+
      
 
 @if ($message = Session::get('info'))
