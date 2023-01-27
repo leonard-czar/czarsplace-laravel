@@ -3,6 +3,7 @@
 @section('title',' Dashboard |')
 
 @section('content')
+{{auth()->id()}}
 <div class="row " style="justify-content:center;background-color: rgba(5, 12, 36, 0.7);z-index:-1">
   <div class="col-sm-12">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">

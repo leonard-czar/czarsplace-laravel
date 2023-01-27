@@ -11,10 +11,10 @@ class Orders extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function orderDetails(){
-        return $this->hasMany(OrderDetails::class);
+    public function orderdetails(){
+        return $this->hasMany(OrderDetails::class,'order_id');
     }
     public function payment(){
-        return $this->hasOne(Payment::class);
+        return $this->hasOne(Payment::class, 'order_id');
     }
 }

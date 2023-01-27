@@ -11,7 +11,7 @@
                 @csrf
 
 
-                <input type="text" name="name" class="form-control mt-3 @error('name') is-invalid @enderror " id="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Usernmae">
+                <input type="text" name="name" class="form-control mt-3 @error('name') is-invalid @enderror " id="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Username">
                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

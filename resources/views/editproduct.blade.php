@@ -8,7 +8,7 @@
         <div class="col-sm-6">
             <form action="/updateproduct/{{$product->id}}" method="POST" enctype="multipart/form-data">               
             @csrf
-            {{-- @method('POST') --}}
+            
             
                 <div class="m-sm-3">watch name<textarea name="watch_name" id="" placeholder="Watch Name" class="form-control" require>{{old('watch_name',$product->watch_name)}}</textarea> 
                 @error('watch_name')

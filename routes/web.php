@@ -77,6 +77,24 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/deletecart/{id}', [App\Http\Controllers\CartController::class, 'deleteCartItem'])->name('cartdeleteitem');
 
+    Route::get('/editcart/{id}', [App\Http\Controllers\CartController::class, 'findCart'])->name('cartedit');
+
+    Route::put('/updatqty/{id}', [App\Http\Controllers\CartController::class, 'editCart'])->name('editqty');
+
+    Route::get('/showcart', [App\Http\Controllers\CartController::class, 'showUserCart'])->name('showcart');
+
+    // Route::get('/checkout', [App\Http\Controllers\CartController::class, 'checkOut'])->name('checkout');
+
+    Route::get('/checkout', function () {
+        return view('checkout');
+    });
+
+    Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
+
+Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->name('payment');
+
+Route::get('/userorder', [App\Http\Controllers\OrdersController::class, 'userOrder'])->name('userorder');
+
 });
 
 Route::get('/index_watchspec/{id}', [App\Http\Controllers\ProductController::class, 'getProduct']);
@@ -85,7 +103,6 @@ Route::get('/', [App\Http\Controllers\ProductController::class, 'Index']);
 
 Route::view('/addbrand', 'addbrand');
 
-Route::get('/showcart', [App\Http\Controllers\CartController::class, 'showUserCart'])->name('showcart');
 
 Auth::routes();
 

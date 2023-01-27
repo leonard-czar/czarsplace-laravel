@@ -177,18 +177,13 @@ ob_start();
                                     <b>LADIES COLLECTIONS</b>
                                 </a>
                             </li>
-                            <?php
-                            if (!empty($corder)) {
-                            ?>
+                            
                                 <li class="nav-item  col-sm " style="padding-left: 10px;">
-                                    <a class="nav-link " href="customerorder.php" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                                    <a class="nav-link " href="/userorder" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                         <b> MY ORDERS</b>
                                     </a>
                                 </li>
-                            <?php
-                            } else {
-                            }
-                            ?>
+                            
                             <li class=" col-sm   <?php if (!empty($corder)) {echo "offset-sm-1";} else {echo "offset-sm-2";} ?>" style="padding-left:10px">
                                 <a class="nav-link " style="color:rgba(255, 255, 255,0.5);" href="/showcart">
                                     <button type="sumbit" class="btn btn-sm btn-outline-dark" name="cart">

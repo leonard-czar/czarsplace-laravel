@@ -12,15 +12,26 @@
             <table class="table">
                 <thead>
                     <tr>
+
                         <th>Qty</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <form action="" method="POST">
+                        <form action="/updatqty/{{$items->id}}" method="POST">
                             @csrf
-                            <td><input type="number" name="quantity" value="  echo $_REQUEST['cartqty'];"> </td>
+                            @method('PUT')
+                            <td class="col-5">
+                                <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{old('quantity',$items->qty)}}"> 
+                                @error('quantity')
+                                <div class="text-danger">
+                                    <p>{{$message}}</p>
+                                </div>
+                                @enderror
+                                <input type="hidden" class="form-control" id="price" name="price" value="{{old('price',$items->price)}}"> 
+                            </td>
+                            <td>
                                 <input type="submit" class="btn btn-primary btn-sm" name="savechange" value="Save changes">
                             </td>
                         </form>

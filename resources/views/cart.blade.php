@@ -40,7 +40,8 @@
                                         <input type="submit" class='btn btn-outline-danger btn-sm' name="btndelete" value="Remove">
                                     </form>
                                     
-                                    <form action="editcartitem.php" method="post" class="">
+                                    <form action="/editcart/{{$cart->id}}" method="GET" class="">
+                                        @csrf
                                         <input type="submit" class='btn btn-outline-warning btn-sm mt-sm-1 text-dark' name="btnedit" value="Edit Qty">
                                     </form>
                                 </td>
@@ -63,8 +64,7 @@
             <b>
 
                 <div>
-                    <input type="text" value="<?php 
-                    // echo array_sum($totals); ?>" name="total" class="text-center" disabled style="color:black">
+                    <input type="text" value="{{$total}}" name="total" class="text-center" disabled style="color:black">
                 </div>
             </b>
         </div>
@@ -74,7 +74,8 @@
 
     <div class="row justify-content-center">
         <div class="col-sm-4 mb-sm-4 mt-sm-1 text-center justify-content-center">
-            <form action="checkout.php" method="post">
+            <form action="/checkout" method="GET">
+                @csrf
                 <input type="submit" name="checkout" value="Check Out" class="btn btn-sm text-light col-sm-5 form-control bg-warning">
             </form>
         </div>
@@ -96,7 +97,7 @@
             <h2 style="font-family: czars2;">Your cart is currently empty</h2>
         </div>
     </div>
-    <div class="text-center mb-sm-5" style="font-family: czars2;"><a href="dashboard.php" style="text-decoration:underline ;color:blue;">start shopping</a></div>
+    <div class="text-center mb-sm-5" style="font-family: czars2;"><a href="{{ route('dashboard')}}" style="text-decoration:underline ;color:blue;">start shopping</a></div>
 
 
 @endif
