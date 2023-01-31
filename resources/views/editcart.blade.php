@@ -23,13 +23,13 @@
                             @csrf
                             @method('PUT')
                             <td class="col-5">
-                                <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{old('quantity',$items->qty)}}"> 
+                                <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{old('quantity',$items->qty)}}">
                                 @error('quantity')
                                 <div class="text-danger">
                                     <p>{{$message}}</p>
                                 </div>
                                 @enderror
-                                <input type="hidden" class="form-control" id="price" name="price" value="{{old('price',$items->price)}}"> 
+                                <input type="hidden" class="form-control" id="price" name="price" value="{{old('price',$items->price)}}">
                             </td>
                             <td>
                                 <input type="submit" class="btn btn-primary btn-sm" name="savechange" value="Save changes">

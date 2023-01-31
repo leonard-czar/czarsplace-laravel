@@ -50,6 +50,15 @@ class CartController extends Controller
         return view('cart', compact('carts', 'total'));
     }
 
+    public function showCart()
+    {
+        $carts = Cart::where('user_id', auth()->id())->get();
+        // $total = $carts->sum('total');
+        return view('layouts.portal', [
+            'carts' => $carts
+        ]);
+    }
+
     public function deleteCart()
     {
         Cart::where('user_id', auth()->id())->delete();

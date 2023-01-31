@@ -28,7 +28,7 @@ class BrandController extends Controller
         // return redirect('/');
         return redirect('allbrands')->with('success', 'Brand was added successfully!');
     }
-    
+
     public function viewIt()
     {
         $brands = Brand::all();

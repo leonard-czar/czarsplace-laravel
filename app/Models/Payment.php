@@ -14,7 +14,9 @@ class Payment extends Model
         'payment_status',
         'amount',
     ];
-    public function orders(){
+    
+    public function orders()
+    {
         return $this->belongsTo(Orders::class, 'order_id');
     }
 }

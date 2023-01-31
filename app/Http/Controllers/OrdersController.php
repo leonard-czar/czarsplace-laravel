@@ -19,9 +19,8 @@ class OrdersController extends Controller
     {
         $orders = Orders::where('user_id', auth()->id())->latest()->get();
         // dd($orders->load('payment'));
-        return view('userorder',[
-            'orders'=>$orders
+        return view('userorder', [
+            'orders' => $orders
         ]);
     }
-
-    }
+}

@@ -8,13 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Orders extends Model
 {
     use HasFactory;
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    public function orderdetails(){
-        return $this->hasMany(OrderDetails::class,'order_id');
+
+    public function orderdetails()
+    {
+        return $this->hasMany(OrderDetails::class, 'order_id');
     }
-    public function payment(){
+    
+    public function payment()
+    {
         return $this->hasOne(Payment::class, 'order_id');
     }
 }

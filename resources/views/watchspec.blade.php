@@ -22,7 +22,7 @@
             <form action="{{route('cart')}}" method="POST">
                 @csrf
                 <input type="number" name="qty" id="qty" value="1" class="form-control @error('qty') is-invalid @enderror mb-sm-2">
-                 @error('qty')
+                @error('qty')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
