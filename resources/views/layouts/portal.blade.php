@@ -129,7 +129,7 @@ ob_start();
 
 
     <!-------------NAVBAR----------->
-    <div class="container-fluid-sm" >
+    <div class="container-fluid-sm">
         <div>
             <div class="row " style="border-bottom: 1px solid ;background-color: #050C24;padding-bottom:30px;padding-left:32px;padding-right:32px;">
                 <div class="col-sm pt-sm-2 " style="color:rgba(255, 255, 255);padding-right:10px">
@@ -139,7 +139,7 @@ ob_start();
                     </a>
                 </div>
                 <div class="col-sm pt-sm-3 ">
-                    <form class="d-sm-flex bd-highlight" method="post" action="/redirect"  style="justify-content:flex-end;">
+                    <form class="d-sm-flex bd-highlight" method="post" action="/redirect" style="justify-content:flex-end;">
                         <input class=" me-1" type="text" name="searchbox" placeholder="Search" aria-label="Search" id="inputs">
                         <button class="btn btn-outline-success btn-sm" type="submit" name="btnsearch">
                             Search
@@ -177,29 +177,22 @@ ob_start();
                                     <b>LADIES COLLECTIONS</b>
                                 </a>
                             </li>
-                            
-                                <li class="nav-item  col-sm " style="padding-left: 10px;">
-                                    <a class="nav-link " href="/userorder" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
-                                        <b> MY ORDERS</b>
-                                    </a>
-                                </li>
-                            
-                            <li class=" col-sm   <?php if (!empty($corder)) {echo "offset-sm-1";} else {echo "offset-sm-2";} ?>" style="padding-left:10px">
+
+                            <li class="nav-item  col-sm " style="padding-left: 10px;">
+                                <a class="nav-link " href="/userorder" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
+                                    <b> MY ORDERS</b>
+                                </a>
+                            </li>
+
+                            <li class=" col-sm   offset-sm-2" style="padding-left:10px">
                                 <a class="nav-link " style="color:rgba(255, 255, 255,0.5);" href="/showcart">
                                     <button type="sumbit" class="btn btn-sm btn-outline-dark" name="cart">
-                                        <i class="fa-solid fa-cart-shopping text-light" style="font-size: 1rem!important;"></i> <span class="badge
-                                        @isset($carts)
-                                         @if ($carts->count()>0)
-                                          {{ 'bg-success' }}                                        
-                                            @else
-                                            @endif
-                                            @endisset
+                                        <i class="fa-solid fa-cart-shopping text-light" style="font-size: 1rem!important;"></i> <span class="badge 
+                                         bg-success  
                                             " style="font-size:0.5rem ;">
-                                            @isset($carts)
+                                            @if (auth()->check())
                                             {{$carts->count()}}
-                                            @endisset                   
-                                            
-                                            
+                                            @endif
                                         </span>
 
                                     </button>

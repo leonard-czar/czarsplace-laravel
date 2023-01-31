@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
-
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,8 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::useBootstrapFive();
-        //
-        // View::share('brands', 'goo','g','gg');
+        view()->composer('layouts.portal', function ($view) {
+            $view->with('carts', Cart::where('user_id', auth()->id())->get());
+        });
     }
 }

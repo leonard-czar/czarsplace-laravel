@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid-sm">
     <div style="font-family: czars2;">
-        
+
     </div>
     <div class="row justify-content-center mt-3">
         <div class="col-sm-10 text-center">
@@ -79,15 +79,15 @@
                         <td> {{$value->clasp}} </td>
                         <td>{{$value->water_resistance}}</td>
                         <td>
-                            <form action="/deleteproduct/{{$value->id}}" method="POST" onsubmit="Deleteproduct(event)"> 
-                                @csrf                               
+                            <form action="/deleteproduct/{{$value->id}}" method="POST" onsubmit="Deleteproduct(event)">
+                                @csrf
                                 <input type="submit" class='btn btn-outline-danger btn-sm  col-12' name="btndelete" value="Delete">
                             </form>
                             <form action="/editproduct/{{$value->id}}" method="GET">
-                                @csrf                              
+                                @csrf
                                 <input type="submit" class='btn btn-outline-primary btn-sm mt-sm-2 mb-sm-2 col-12 ' name="btnedit" value="Edit">
                             </form>
-                            
+
                         </td>
 
 

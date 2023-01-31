@@ -3,7 +3,8 @@
 @section('title',' Dashboard |')
 
 @section('content')
-{{auth()->id()}}
+
+
 <div class="row " style="justify-content:center;background-color: rgba(5, 12, 36, 0.7);z-index:-1">
   <div class="col-sm-12">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -36,43 +37,43 @@
 </div>
 <div class="container-fluid-sm m-sm-3">
 
-  @if ($brands->count() > 0) 
-    @foreach ($brands as $brand) 
+  @if ($brands->count() > 0)
+  @foreach ($brands as $brand)
   <div class="row">
-        <div class="col-sm mb-sm-5 mt-sm-1 text-center">
-          <div style="margin-left:50px;position:relative; ">
-            <img src="{{$brand->brandimg}}" alt="" width="110" class="img-fluid">
+    <div class="col-sm mb-sm-5 mt-sm-1 text-center">
+      <div style="margin-left:50px;position:relative; ">
+        <img src="{{$brand->brandimg}}" alt="" width="110" class="img-fluid">
 
-          </div>
-          <hr>
+      </div>
+      <hr>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    @foreach ($brand->products as $product)
+
+    <div class="col-sm-3 mb-sm-5 ">
+      <form action="/watchspec/{{$product->id}}" method='GET' style="text-align: center;">
+        <img src="{{$product->watch_image}}" alt="" class="img-fluid">
+
+        <div style="text-align: center;font-size: 1vw;color:rgba(0, 5, 0,0.6);" class="mb-sm-2">
+          <b>{{$product->watch_description}}</b>
         </div>
+        <input type="submit" value="{{$product->watch_name}}" class="btn btn-sm col-sm-10" style="background-color: #050C24;color:burlywood;font-size: 1.2vw;" name="btnsubmit">
+        <br>
 
-      </div>
-
-
-      <div class="row">
-        
-        @foreach ($brand->products as $product) 
-        
-          <div class="col-sm-3 mb-sm-5 ">
-            <form action="/watchspec/{{$product->id}}" method='GET' style="text-align: center;">
-              <img src="{{$product->watch_image}}" alt="" class="img-fluid">
-
-              <div style="text-align: center;font-size: 1vw;color:rgba(0, 5, 0,0.6);" class="mb-sm-2">
-                <b>{{$product->watch_description}}</b>
-              </div>
-              <input type="submit" value="{{$product->watch_name}}" class="btn btn-sm col-sm-10" style="background-color: #050C24;color:burlywood;font-size: 1.2vw;" name="btnsubmit">
-              <br>
-              
-            </form>
-          </div>
-
-         @endforeach 
-
-      </div>
+      </form>
+    </div>
 
     @endforeach
-  @endif 
+
+  </div>
+
+  @endforeach
+  @endif
 </div>
 
 @endsection
