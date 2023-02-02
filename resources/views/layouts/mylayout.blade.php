@@ -1,6 +1,3 @@
-<?php
-ob_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -283,6 +280,4 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
   </div>
   </footer>
   <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-  <?php
-  ob_end_flush();
-  ?>
+  

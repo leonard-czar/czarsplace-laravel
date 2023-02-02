@@ -27,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // You can also bind the same variable with multiple views 
+        // by just giving the first argument as array of views. like
+        // view()->composer(['layouts.portal','layouts.mylayouts','layouts.admin'],function(){})
         view()->composer('layouts.portal', function ($view) {
             $view->with('carts', Cart::where('user_id', auth()->id())->get());
         });

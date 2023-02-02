@@ -1,7 +1,3 @@
-<?php
-ob_start();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -157,22 +153,22 @@ ob_start();
                 <nav class="navbar navbar-expand navbar-light">
                     <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         <ul class="navbar-nav mb-sm-1 col-sm text-center">
-                            <li class="nav-item  col-sm-1" style="">
+                            <li class="nav-item  col-sm-1">
                                 <a class="nav-link " href="{{ route('dashboard')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b>HOME</b>
                                 </a>
                             </li>
-                            <li class="nav-item  col-sm-1" style="">
+                            <li class="nav-item  col-sm-1">
                                 <a class="nav-link " href="{{ url('/displaybrands')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b>BRANDS</b>
                                 </a>
                             </li>
-                            <li class="nav-item  col-sm-2" style="">
+                            <li class="nav-item  col-sm-2">
                                 <a class="nav-link " href="{{url('/malewatches')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b>MEN COLLECTIONS</b>
                                 </a>
                             </li>
-                            <li class="nav-item  col-sm-2" style="">
+                            <li class="nav-item  col-sm-2">
                                 <a class="nav-link " href="{{url('/femalewatches')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
                                     <b>LADIES COLLECTIONS</b>
                                 </a>
@@ -320,6 +316,3 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
             }
         }
     </script>
-    <?php
-    ob_end_flush();
-    ?>

@@ -1,18 +1,3 @@
-<?php
-ob_start();
-session_start();
-
-
-// if (isset($_SESSION['log']) && $_SESSION['log'] == "#AdMin#") {
-// } else {
-
-//     $msg = "Only An Administrator Can Access This Page!";
-//     header("Location: login.php?msg=$msg");
-//     exit();
-// }
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,11 +17,7 @@ session_start();
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
 
-    <title><?php if (isset($admin)) {
-                echo $admin . " | ";
-            };
-
-            ?>{{config('app.name',"Czar's Place")}} Haven for luxury wristwatches</title>
+    <title></title>
 
     <style>
         @font-face {
@@ -150,7 +131,7 @@ session_start();
                 <div class="col-sm mt-sm-1 pt-sm-2" style="color:rgba(255, 255, 255);">
                     <a href="/admindashboard" id="brandname">
                         <h1 class="text-center">
-                        {{config('app.name',"Czar's Place")}}
+                            {{config('app.name',"Czar's Place")}}
                         </h1>
                     </a>
                 </div>
@@ -205,11 +186,11 @@ session_start();
 
         <main>
             @include('flash-message')
-        @yield('content')
+            @yield('content')
         </main>
 
-                <!--COPYRIGHT-->
-                <footer style="justify-content:space-between;background-color: #050C24;">
+        <!--COPYRIGHT-->
+        <footer style="justify-content:space-between;background-color: #050C24;">
             <div class="container-fluid-sm">
                 <div class="row">
                     <p class="col mt-1" style="text-align:center; color:rgba(255, 255, 255,0.5);font-family:czars;
@@ -228,6 +209,7 @@ session_start();
                     return false;
                 }
             }
+
             function validateDelete(e) {
                 var response = confirm('Are you sure you want to delete this Brand?');
                 if (response == true) {
@@ -237,6 +219,7 @@ session_start();
                     return false;
                 }
             }
+
             function Deleteproduct(e) {
                 var response = confirm('Are you sure you want to delete this product?');
                 if (response == true) {
@@ -246,9 +229,4 @@ session_start();
                     return false;
                 }
             }
-            
         </script>
-
-        <?php
-        ob_end_flush();
-        ?>
