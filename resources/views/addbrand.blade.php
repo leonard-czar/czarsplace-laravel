@@ -1,22 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<?php
-// if (isset($_REQUEST['btnaddbrand'])) {
 
-//     if (!empty($_REQUEST['brand_name'])) {
-
-//         $obj = new Admin;
-//         $brand = $obj->Insertbrand($_REQUEST['brand_name'], $_FILES['brand_image']['name']);
-//         $addbrand = "Brand added Successfully!";
-//         header("Location: allbrands.php?addbrand=$addbrand");
-//         exit;
-//     } else {
-//         echo "<div class='text-danger text-center m-1'>Please enter a valid brandname!</div>";
-//     }
-// }
-
-?>
 <div class="container">
 
     <div class="row text-center justify-content-center m-2 mb-5">

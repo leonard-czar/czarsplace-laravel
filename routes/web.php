@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
+
+#Admin middleware begins
 
 Route::middleware('admin')->group(function () {
 
@@ -47,9 +50,10 @@ Route::middleware('admin')->group(function () {
     Route::get('/allusers', [App\Http\Controllers\AdminController::class, 'displayUsers'])->name('allusers');
 
     Route::get('/allorders', [App\Http\Controllers\AdminController::class, 'displayOrders'])->name('allorders');
-
-   
 });
+#Admin middleware ends
+
+#auth middleware begins
 
 Route::middleware('auth')->group(function () {
 
@@ -66,7 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/audemars', [App\Http\Controllers\ProductController::class, 'displayAudemars'])->name('audemars');
 
     Route::get('/femalewatches', [App\Http\Controllers\ProductController::class, 'displayFemaleWatch'])->name('femalewatch');
-    
+
     Route::get('/malewatches', [App\Http\Controllers\ProductController::class, 'displayMaleWatch'])->name('malewatch');
 
     Route::get('/displaybrands', [App\Http\Controllers\BrandController::class, 'showBrands'])->name('displaybrands');
@@ -83,43 +87,33 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/showcart', [App\Http\Controllers\CartController::class, 'showUserCart'])->name('showcart');
 
-    // Route::get('/checkout', [App\Http\Controllers\CartController::class, 'checkOut'])->name('checkout');
-
     Route::get('/checkout', function () {
         return view('checkout');
     });
 
     Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
 
-Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->name('payment');
+    Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->name('payment');
 
-Route::get('/userorder', [App\Http\Controllers\OrdersController::class, 'userOrder'])->name('userorder');
-
+    Route::get('/userorder', [App\Http\Controllers\OrdersController::class, 'userOrder'])->name('userorder');
 });
 
-Route::get('/index_watchspec/{id}', [App\Http\Controllers\ProductController::class, 'getProduct']);
+#auth middleware ends
 
-Route::get('/', [App\Http\Controllers\ProductController::class, 'Index']);
 
 Route::view('/addbrand', 'addbrand');
 
-
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
 Route::get('/index_displaybrands', [App\Http\Controllers\BrandController::class, 'showIndexBrands'])->name('displayindexbrands');
 
-Route::get('/index_audemars', [App\Http\Controllers\ProductController::class, 'displayIndexAudemars'])->name('indexaudemars');
-
-Route::get('/index_rolex', [App\Http\Controllers\ProductController::class, 'displayIndexRolex'])->name('indexrolex');
-
-Route::get('/index_hublot', [App\Http\Controllers\ProductController::class, 'displayIndexHublot'])->name('indexhublot');
-
-Route::get('/index_malewatches', [App\Http\Controllers\ProductController::class, 'displayIndexMaleWatch'])->name('indexmalewatch');
-
-Route::get('/index_femalewatches', [App\Http\Controllers\ProductController::class, 'displayIndexFemaleWatch'])->name('indexfemalewatch');
-
-Route::post('/index_redirect', [App\Http\Controllers\ProductController::class, 'indexRedirect'])->name('indexredirect');
+Route::controller(ProductController::class)->group(function () {
+    Route::post('/index_redirect', 'indexRedirect')->name('indexredirect');
+    Route::get('/index_femalewatches', 'displayIndexFemaleWatch')->name('indexfemalewatch');
+    Route::get('/index_malewatches', 'displayIndexMaleWatch')->name('indexmalewatch');
+    Route::get('/index_hublot', 'displayIndexHublot')->name('indexhublot');
+    Route::get('/index_rolex', 'displayIndexRolex')->name('indexrolex');
+    Route::get('/index_audemars', 'displayIndexAudemars')->name('indexaudemars');
+    Route::get('/index_watchspec/{id}', 'getProduct');
+    Route::get('/', 'Index');
+});
