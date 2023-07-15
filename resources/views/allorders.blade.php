@@ -21,7 +21,6 @@
                     <th>Shipping Address</th>
                     <th>Alt Phonumber</th>
                     <th>Order Date</th>
-                    <th>Action</th>
                     <th>Order Details</th>
                 </tr>
             </thead>
@@ -32,16 +31,17 @@
                 @foreach ($orders as $order)
 
                 <tr>
-                    <td> $kanta++ ?></td>
-                    <td> "CZP" . $order->id </td>
-                    <td> $order->user_id</td>
-                    <td> $order->payment_status</td>
-                    <td> $order->amount</td>
-                    <td> $order->shipping_address</td>
-                    <td> $order->alt_phonenumber</td>
-                    <td> date('jS M Y h:i:s a', strtotime($order->created_at)); ?></td>
+                    <td> {{$kanta++ }}</td>
+                    <td> {{"CZP" . $order->id }}</td>
+                    <td>{{$order->user_id}} </td>
+                    <td>{{$order->payment?->payment_status}} </td>
+                    <td> {{$order->total_amount}}</td>
+                    <td>{{$order->shipping_address}} </td>
+                    <td> {{$order->alt_phonenumber}}</td>
+                    <td> {{date('jS M Y h:i:s a', strtotime($order->created_at))}} </td>
                     <td>
-                        <form action="orderdetails.php" method="post">
+                        <form action="/orderdetails/{{$order->id}}" method="get">
+                            @csrf
                             <input type="submit" name="" value="Details" class="btn btn-primary btn-sm">
                         </form>
                     </td>
