@@ -23,4 +23,14 @@ class OrdersController extends Controller
             'orders' => $orders
         ]);
     }
+
+    public function displayOrders()
+    {
+        $order = Orders::all();
+        return view('allorders', [
+            'orders' => $order
+        ]);
+    }
+
+   
 }

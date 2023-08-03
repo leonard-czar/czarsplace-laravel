@@ -238,7 +238,7 @@ class ProductController extends Controller
         if ($search == 'rolex') {
             return redirect()->action([ProductController::class, 'displayIndexRolex']);
         }
-        if ($search == 'audemars' || $search == 'audemars piguet') {
+        if ($search == 'audemars' || $search == 'audemars piguet' || $search == 'ap') {
             return redirect()->action([ProductController::class, 'displayIndexAudemars']);
         }
         if ($search == 'hublot') {
@@ -260,7 +260,7 @@ class ProductController extends Controller
         if ($search == 'rolex') {
             return redirect()->action([ProductController::class, 'displayRolex']);
         }
-        if ($search == 'audemars' || $search == 'audemars piguet') {
+        if ($search == 'audemars' || $search == 'audemars piguet' || $search == 'ap') {
             return redirect()->action([ProductController::class, 'displayAudemars']);
         }
         if ($search == 'hublot') {
