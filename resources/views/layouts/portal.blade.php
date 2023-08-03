@@ -59,7 +59,6 @@
         #copyright_txt {
             font-family: czars, sans-serif;
             color: white;
-            font-size: 1.2vw;
         }
 
         .row1 {
@@ -111,7 +110,6 @@
             border: 2px solid white;
             color: rgba(0, 0, 0, 0.9);
             background-color: white;
-            font-size: 1vw;
             border-radius: 7%;
             padding: 3px;
         }
@@ -140,7 +138,9 @@
                         Place")}}</h3>
                 </a>
                 <form class="d-flex" method="post" action="/redirect">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    @csrf
+                    <input class="form-control me-2" type="search" name="searchbox" placeholder="Search"
+                        aria-label="Search">
                     <button class="btn btn-outline-success" type="submit" name="btnsearch">Search</button>
                 </form>
             </div>
@@ -169,10 +169,10 @@
                             <a class="nav-link brandname" href="/userorder">MY ORDERS</a>
                         </li>
                     </ul>
-                    <a class="nav-link d-flex" style="color:rgba(255, 255, 255,0.5);" href="/showcart">
-                        <a type="sumbit" class="btn btn-outline-dark" name="cart">
-                            <i class="fa-solid fa-cart-shopping text-light"></i>
-                            <span class="badge bg-success">
+                    <a style="color:rgba(255, 255, 255,0.5);" class="d-flex m-mb-5 m-lg-2">
+                        <a type="sumbit" class="btn " href="/showcart" name="cart">
+                            <i class="fa-solid fa-cart-shopping text-light "></i>
+                            <span class="badge bg-success" style="font-size: 50%">
                                 @if (auth()->check())
                                 {{$carts->count()}}
                                 @endif
@@ -180,7 +180,7 @@
                         </a>
                         <br>
                     </a>
-                    <a href="{{ route('logout') }}" style="color:white;font-size:1.1vw!important;" id="logout"
+                    <a href="{{ route('logout') }}" style="color:white;" id="logout"
                         onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                         class="btn btn-outline-danger btn-sm"><b>Singout</b>
                     </a>
@@ -249,7 +249,7 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
                     </div>
                     <!--SOCIALS-->
 
-                    <div class="col-sm-3  mt-sm-4" style=" text-align:center;">
+                    <div class="col-sm-3  mt-4" style=" text-align:center;">
                         <h3 class="footr">FOLLOW US</h3>
                         <a href="http://facebook.com" target="_blank" style="text-decoration: none; "> <img
                                 src="{{asset('images/fb1.png')}}" alt="facebook page" width="40" class="socials"></a>
@@ -264,14 +264,14 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
                         <!--WHATSAPP-->
 
                         <a id="whatsapp" href="http://whatsapp.com" target="_blank" style="text-decoration: none;">
-                            <div class="mt-2 me-2 opacity-50"><span id="spanwhatsapp">
+                            <div class="mt-2 me-2 opacity-50 "><span id="spanwhatsapp">
                                     <b>chat with us</b> </span></div>
                             <img src="{{asset('images/wats2.png')}}" alt="whatsapp" width="40"
                                 style=" border-radius: 20%;">
                         </a>
                     </div>
 
-                    <div class="col-sm-2  mt-sm-4" style="text-align:center; padding-left:7px;padding-right:7px"
+                    <div class="col-sm-2  mt-4" style="text-align:center; padding-left:7px;padding-right:7px"
                         id="contactus">
                         <div>
                             <h3 class="footr"> CONTACT US</h3>
@@ -281,7 +281,7 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
                                 </i> 08182281634
                             </div>
                             <div>
-                                <a href="contactus.php"
+                                <a href="#"
                                     style="text-decoration: none;color:rgba(255, 255, 255,0.5);font-size: 13px;">
                                     <i class="fa-solid fa-message text-light"></i> message </a>
                             </div>

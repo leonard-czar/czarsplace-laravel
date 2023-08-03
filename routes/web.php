@@ -52,7 +52,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/allorders', [App\Http\Controllers\OrdersController::class, 'displayOrders'])->name('allorders');
 
     Route::get('/orderdetails/{id}', [App\Http\Controllers\OrdersDetailController::class, 'displayDetails'])->name('orderdetails');
-
 });
 #Admin middleware ends
 

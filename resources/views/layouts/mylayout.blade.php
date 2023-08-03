@@ -56,7 +56,6 @@
     #copyright_txt {
       font-family: czars, sans-serif;
       color: white;
-      font-size: 1.2vw;
     }
 
     .row1 {
@@ -108,7 +107,6 @@
       border: 2px solid white;
       color: rgba(0, 0, 0, 0.9);
       background-color: white;
-      font-size: 1vw;
       border-radius: 7%;
       padding: 3px;
     }
@@ -131,8 +129,9 @@
           <h3>{{config('app.name',"Czar's
             Place")}}</h3>
         </a>
-        <form class="d-flex" method="post" action="/redirect">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" method="post" action="/index_redirect">
+          @csrf
+          <input class="form-control me-2" type="search" placeholder="Search" name="isearchbox" aria-label="Search">
           <button class="btn btn-outline-success" type="submit" name="btnsearch">Search</button>
         </form>
       </div>
@@ -254,8 +253,8 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
                 <i class="fa-solid fa-phone text-light">
                 </i> 08182281634
               </div>
-              <div>
-                <a href="contactus2.php" style="text-decoration: none;color:rgba(255, 255, 255,0.5);font-size: 13px;">
+              <div class="mb-1">
+                <a href="#" style="text-decoration: none;color:rgba(255, 255, 255,0.5);font-size: 13px;">
                   <i class="fa-solid fa-message text-light"></i> message </a>
               </div>
 

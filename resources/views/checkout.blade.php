@@ -10,8 +10,8 @@
         <div class="col-sm-5">
             <form action="{{route('pay')}}" method="POST">
                 @csrf
-                <input type="text" name="address" value="" placeholder="Enter Shipping Address"
-                    class="form-control text-center">
+                <input type="text" name="address" placeholder="Enter Shipping Address" class="form-control text-center"
+                    required>
                 @error('address')
                 <div class="text-danger">
                     <p>{{$message}}</p>

@@ -4,9 +4,8 @@
 
 @if ($carts->count()>0)
 
-<div class="text-center mt-sm-4 mb-sm-4">
-    <p class="text-dark " style="font-size: 1.6vw!important;">Your cart Items <i class="fa-solid fa-cart-shopping"
-            style="font-size: 2.2vw!important;color:darkgray "></i></p>
+<div class="text-center mt-4 mb-4">
+    <h5 class="text-dark ">Your cart Items <i class="fa-solid fa-cart-shopping" style="color:darkgray "></i></h5>
 </div>
 <main>
     <div class="row justify-content-center">
@@ -19,7 +18,7 @@
                         <th>Qty</th>
                         <th>Unit Price &#8358;</th>
                         <th>Total &#8358;</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +31,7 @@
                         <td>
                             <?php echo  $kanta++ ?>
                         </td>
-                        <td><img src="{{$cart->product['watch_image'] }}" alt="" width="45" class="img-fluid"></td>
+                        <td><img src="{{$cart->product['watch_image'] }}" alt="" width="100" class="img-fluid"></td>
                         <td> {{$cart->qty }} </td>
                         <td>{{$cart->price}}</td>
                         <td>{{$cart->total}}</td>
@@ -46,7 +45,7 @@
 
                             <form action="/editcart/{{$cart->id}}" method="GET" class="">
                                 @csrf
-                                <input type="submit" class='btn btn-outline-warning btn-sm mt-sm-1 text-dark'
+                                <input type="submit" class='btn btn-outline-warning btn-sm mt-1 text-dark'
                                     name="btnedit" value="Edit Qty">
                             </form>
                         </td>
@@ -62,14 +61,14 @@
     </div>
 </main>
 <div class="row mb-5 justify-content-center">
-    <div class="col-2 offset-1 text-center">
+    <div class="col-2 col-lg-3 offset-1 text-center">
         <div style=" color:rgba(0, 0, 0,0.5)"><i> total</i> &#8358;</div>
     </div>
     <div class="col-6 text-center" style="margin-right: 40px;">
         <b>
 
             <div>
-                <input type="text" value="{{$total}}" name="total" class="text-center" disabled style="color:black">
+                <input type="text" value="{{$total}}" name="total" class="text-center" disabled>
             </div>
         </b>
     </div>

@@ -11,7 +11,6 @@
                 </h3>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
-
                     <input type="email" name="email" id="email"
                         class="form-control mt-3 mb-3 @error('email') is-invalid @enderror" value="{{ old('email') }}"
                         required autocomplete="email" autofocus placeholder="Email Address">
