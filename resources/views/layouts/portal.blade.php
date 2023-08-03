@@ -36,6 +36,12 @@
 
 
 
+        .brandname {
+            font-family: czars, sans-serif;
+            text-decoration: none;
+            color: white;
+        }
+
         #brandname {
             font-family: czars, sans-serif;
             text-decoration: none;
@@ -125,88 +131,65 @@
 
 
     <!-------------NAVBAR----------->
-    <div class="container-fluid-sm">
-        <div>
-            <div class="row " style="border-bottom: 1px solid ;background-color: #050C24;padding-bottom:30px;padding-left:32px;padding-right:32px;">
-                <div class="col-sm pt-sm-2 " style="color:rgba(255, 255, 255);padding-right:10px">
-                    <a href="{{ route('dashboard')}}" id="brandname">
-                        <h1>{{config('app.name',"Czar's Place")}}
-                        </h1>
+    <div class="container-fluid-sm ">
+
+        <nav class="navbar navbar-light bg-light" style="background-color: #050C24!important;">
+            <div class="container-fluid">
+                <a class="navbar-brand " href="{{ route('dashboard')}}" id="brandname">
+                    <h3>{{config('app.name',"Czar's
+                        Place")}}</h3>
+                </a>
+                <form class="d-flex" method="post" action="/redirect">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit" name="btnsearch">Search</button>
+                </form>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #050C24!important;">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-auto my-1 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link brandname" aria-current="page" href="{{ route('dashboard')}}">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link brandname" href="{{ url('/displaybrands')}}">BRANDS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link brandname" href="{{url('/malewatches')}}">MEN COLLECTION</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link brandname" href="{{url('/femalewatches')}}">LADIES COLLECTION</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link brandname" href="/userorder">MY ORDERS</a>
+                        </li>
+                    </ul>
+                    <a class="nav-link d-flex" style="color:rgba(255, 255, 255,0.5);" href="/showcart">
+                        <a type="sumbit" class="btn btn-outline-dark" name="cart">
+                            <i class="fa-solid fa-cart-shopping text-light"></i>
+                            <span class="badge bg-success">
+                                @if (auth()->check())
+                                {{$carts->count()}}
+                                @endif
+                            </span>
+                        </a>
+                        <br>
                     </a>
-                </div>
-                <div class="col-sm pt-sm-3 ">
-                    <form class="d-sm-flex bd-highlight" method="post" action="/redirect" style="justify-content:flex-end;">
-                        <input class=" me-1" type="text" name="searchbox" placeholder="Search" aria-label="Search" id="inputs">
-                        <button class="btn btn-outline-success btn-sm" type="submit" name="btnsearch">
-                            Search
-                        </button>
+                    <a href="{{ route('logout') }}" style="color:white;font-size:1.1vw!important;" id="logout"
+                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                        class="btn btn-outline-danger btn-sm"><b>Singout</b>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
                     </form>
                 </div>
             </div>
-        </div>
-
-
-
-        <div class="row " style="background-color: #050C24;position:
-                sticky;top: 0;z-index:1; padding-left:12px;display:flex; ">
-            <div>
-                <nav class="navbar navbar-expand navbar-light">
-                    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                        <ul class="navbar-nav mb-sm-1 col-sm text-center">
-                            <li class="nav-item  col-sm-1">
-                                <a class="nav-link " href="{{ route('dashboard')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
-                                    <b>HOME</b>
-                                </a>
-                            </li>
-                            <li class="nav-item  col-sm-1">
-                                <a class="nav-link " href="{{ url('/displaybrands')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
-                                    <b>BRANDS</b>
-                                </a>
-                            </li>
-                            <li class="nav-item  col-sm-2">
-                                <a class="nav-link " href="{{url('/malewatches')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
-                                    <b>MEN COLLECTIONS</b>
-                                </a>
-                            </li>
-                            <li class="nav-item  col-sm-2">
-                                <a class="nav-link " href="{{url('/femalewatches')}}" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
-                                    <b>LADIES COLLECTIONS</b>
-                                </a>
-                            </li>
-
-                            <li class="nav-item  col-sm " style="padding-left: 10px;">
-                                <a class="nav-link " href="/userorder" style="color:rgba(255, 255, 255,0.5);font-size: 1.1vw!important;">
-                                    <b> MY ORDERS</b>
-                                </a>
-                            </li>
-
-                            <li class=" col-sm   offset-sm-2" style="padding-left:10px">
-                                <a class="nav-link " style="color:rgba(255, 255, 255,0.5);" href="/showcart">
-                                    <button type="sumbit" class="btn btn-sm btn-outline-dark" name="cart">
-                                        <i class="fa-solid fa-cart-shopping text-light" style="font-size: 1rem!important;"></i> <span class="badge 
-                                         bg-success  
-                                            " style="font-size:0.5rem ;">
-                                            @if (auth()->check())
-                                            {{$carts->count()}}
-                                            @endif
-                                        </span>
-
-                                    </button>
-                                    </b>
-                                </a>
-                            </li>
-                            <li class="col-sm mt-sm-1">
-                                <a href="{{ route('logout') }}" style="color:white;font-size:1.1vw!important;" id="logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="btn btn-outline-danger btn-sm"><b>Singout</b>
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
+        </nav>
 
         <div>
             @include('flash-message')
@@ -226,15 +209,19 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
                             <b>Luxury</b> is what sets apart ambitious people from others.
                             <b>Style </b>is what sets apart sophisticated people from others.
                             <b>Quality</b> is what sets wise people apart from others.
-                            At <b>Czar's Place</b>, our vision is to provide our clients with premium watchesthat have luxury, style, and quality.
+                            At <b>Czar's Place</b>, our vision is to provide our clients with premium watchesthat have
+                            luxury, style, and quality.
                             Our products will help you create your own style statement that is bold and classy. <br>
                             <span><b><i>Why choose us?</i> </b> </span> <br>
-                            One word: <b>honesty</b>. Our unmatched honesty regarding our products is something our clients will find rare in the industry.
-                            Our recommendations will be tailored to your needs, and we will help you embody your very own style statement.
+                            One word: <b>honesty</b>. Our unmatched honesty regarding our products is something our
+                            clients will find rare in the industry.
+                            Our recommendations will be tailored to your needs, and we will help you embody your very
+                            own style statement.
 
                             <h6> Our Core Values</h6>
                             <span><b>Customers Come First,</b> We do not want to sell you mere objects.
-                                We want to adorn you with the best luxury watches and jewelry money could possibly buy.</span>
+                                We want to adorn you with the best luxury watches and jewelry money could possibly
+                                buy.</span>
                             <span><b> Authentic To The Core</b></span> <br>
                             You can throw your fears of being tricked into buying something fake. Integrity, honesty,
                             and authenticity lie in our foundations and sets us apart from others.
@@ -242,9 +229,11 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
                             <span><b>Variety of Style</b> </span> <br>
                             <span>We are constantly searching,
                                 looking and talking for new pieces to add to our collection.
-                                We understand the importance of diversity in style and we make sure that you find everything you are looking for here at<b> Czars</b>.
+                                We understand the importance of diversity in style and we make sure that you find
+                                everything you are looking for here at<b> Czars</b>.
                                 Our collections include all the important and famous name brands,
-                                and when you're choosing to do business with us, you don't need to worry about running out of style.</span>
+                                and when you're choosing to do business with us, you don't need to worry about running
+                                out of style.</span>
 
                         </div>
 
@@ -262,9 +251,12 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
 
                     <div class="col-sm-3  mt-sm-4" style=" text-align:center;">
                         <h3 class="footr">FOLLOW US</h3>
-                        <a href="http://facebook.com" target="_blank" style="text-decoration: none; "> <img src="{{asset('images/fb1.png')}}" alt="facebook page" width="40" class="socials"></a>
+                        <a href="http://facebook.com" target="_blank" style="text-decoration: none; "> <img
+                                src="{{asset('images/fb1.png')}}" alt="facebook page" width="40" class="socials"></a>
 
-                        <a href="http://twitter.com" target="_blank" style="text-decoration: none;"><img src="{{asset('images/twitter2.png')}}" alt="twitter page" width="40" class="socials"> </a>
+                        <a href="http://twitter.com" target="_blank" style="text-decoration: none;"><img
+                                src="{{asset('images/twitter2.png')}}" alt="twitter page" width="40" class="socials">
+                        </a>
 
                         <a href="http://instagram.com" target="_blank" style="text-decoration: none;">
                             <img src="{{asset('images/ig1.png')}}" alt="instagram page" width="40" class="socials">
@@ -274,19 +266,23 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
                         <a id="whatsapp" href="http://whatsapp.com" target="_blank" style="text-decoration: none;">
                             <div class="mt-2 me-2 opacity-50"><span id="spanwhatsapp">
                                     <b>chat with us</b> </span></div>
-                            <img src="{{asset('images/wats2.png')}}" alt="whatsapp" width="40" style=" border-radius: 20%;">
+                            <img src="{{asset('images/wats2.png')}}" alt="whatsapp" width="40"
+                                style=" border-radius: 20%;">
                         </a>
                     </div>
 
-                    <div class="col-sm-2  mt-sm-4" style="text-align:center; padding-left:7px;padding-right:7px" id="contactus">
+                    <div class="col-sm-2  mt-sm-4" style="text-align:center; padding-left:7px;padding-right:7px"
+                        id="contactus">
                         <div>
                             <h3 class="footr"> CONTACT US</h3>
-                            <div style="color:rgba(255, 255, 255,0.5);font-size: 13px;font-family:czars;padding-bottom:5px">
+                            <div
+                                style="color:rgba(255, 255, 255,0.5);font-size: 13px;font-family:czars;padding-bottom:5px">
                                 <i class="fa-solid fa-phone text-light">
                                 </i> 08182281634
                             </div>
                             <div>
-                                <a href="contactus.php" style="text-decoration: none;color:rgba(255, 255, 255,0.5);font-size: 13px;">
+                                <a href="contactus.php"
+                                    style="text-decoration: none;color:rgba(255, 255, 255,0.5);font-size: 13px;">
                                     <i class="fa-solid fa-message text-light"></i> message </a>
                             </div>
 
