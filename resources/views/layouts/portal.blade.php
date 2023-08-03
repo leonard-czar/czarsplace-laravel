@@ -170,7 +170,7 @@
                         </li>
                     </ul>
                     <a style="color:rgba(255, 255, 255,0.5);" class="d-flex m-mb-5 m-lg-2">
-                        <a type="sumbit" class="btn " href="/showcart" name="cart">
+                        <a type="sumbit" class="btn" href="/showcart" name="cart">
                             <i class="fa-solid fa-cart-shopping text-light "></i>
                             <span class="badge bg-success" style="font-size: 50%">
                                 @if (auth()->check())
