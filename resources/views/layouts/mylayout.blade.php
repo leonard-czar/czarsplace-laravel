@@ -156,9 +156,6 @@
             <li class="nav-item">
               <a class="nav-link brandname" href="{{ url('/index_femalewatches')}}">LADIES COLLECTION</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link brandname" href="/userorder">MY ORDERS</a>
-            </li>
           </ul>
           <li class="nav-item d-flex ">
             <a class="nav-link brandname" style="color:rgba(255, 255, 255,0.5);" href="{{route('login')}}">
@@ -239,7 +236,7 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
             </a>
             <!--WHATSAPP-->
 
-            <a id="whatsapp" href="http://whatsapp.com" target="_blank" style="text-decoration: none;">
+            <a id="whatsapp" href="https://wa.me/08182281634" target="_blank" style="text-decoration: none;">
               <div class="mt-2 me-2 opacity-50"><span id="spanwhatsapp">
                   <b>chat with us</b> </span></div>
               <img src="{{asset('images/wats2.png')}}" alt="whatsapp" width="40" style=" border-radius: 20%;">

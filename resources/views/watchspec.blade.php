@@ -15,28 +15,30 @@
                 <img src="{{asset($product->watch_image)}}" alt="" class="img-fluid">
             </div>
         </div>
-        <div class="col-sm-4 mt-sm-3">
+        <div class="col-sm-4 mt-3 p-4 p-lg-1">
             <h4 style="font-family: czars2;">{{$product->watch_description}}</h4>
-            <div style="color:rgba(0, 0, 0,0.8);" class="mb-sm-4">&#8358;{{$product->watch_price}}</div>
-            <label for="" class="mb-sm-1 ">Quantity</label>
-            <form action="{{route('cart')}}" method="POST">
-                @csrf
-                <input type="number" name="qty" id="qty" value="1" class="form-control @error('qty') is-invalid @enderror mb-sm-2">
-                @error('qty')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                <input type="hidden" value="{{$product->watch_price}}" name="price">
-                <input type="hidden" value="{{$product->id}}" name="watchid">
-                <input type="submit" name="buynow" id="addcart" style="border: 1px solid #fbd079; color:black;
- background-color:#fbd079;font-weight:500px" value="BUY NOW" class="btn form-control mb-sm-5 mt-sm-1">
+            <div style="color:rgba(0, 0, 0,0.8);" class="mb-4">&#8358;{{$product->watch_price}}</div>
+            <div><label for="" class="mb-sm-1 ">Quantity</label>
+                <form action="{{route('cart')}}" method="POST">
+                    @csrf
+                    <input type="number" name="qty" id="qty" value="1"
+                        class="form-control @error('qty') is-invalid @enderror mb-2">
+                    @error('qty')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    <input type="hidden" value="{{$product->watch_price}}" name="price">
+                    <input type="hidden" value="{{$product->id}}" name="watchid">
+                    <input type="submit" name="buynow" id="addcart" style="border: 1px solid #fbd079; color:black;
+     background-color:#fbd079;font-weight:500px" value="BUY NOW" class="btn form-control mb-5 mt-1">
 
-            </form>
-            <h5 style="font-family: czars2;  ">WATCH SPECIFICATIONS</h5>
+                </form>
+            </div>
+            <h5 style="font-family: czars2;text-align:center">WATCH SPECIFICATIONS</h5>
 
 
-            <ul style="list-style-type:square ;font-family: czars2;" class="mb-sm-5">
+            <ul style="list-style-type:square ;font-family: czars2;" class="mb-5">
                 <li>Brand: {{$product->brand['brandname']}}</li>
                 <li>Collection: {{$product->collection}}</li>
                 <li>Reference Number: {{$product->reference_number}}</li>
@@ -62,7 +64,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm text-center mb-sm-3 mt-sm-3">
+    <div class="col-sm text-center mb-3 mt-3">
         <div style="text-decoration:underline ;"><a href="{{ route('dashboard')}}" class="text-primary">
                 << Back</a>
         </div>

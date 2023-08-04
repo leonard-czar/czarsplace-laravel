@@ -21,7 +21,7 @@ $kanta = 1;
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-sm-10 mb-sm-5 mt-sm-2 table-responsive">
+    <div class="col-sm-10 mb-5 mt-2 table-responsive">
 
         <table class="table table-hover table-striped">
             <thead class="table-dark ">
