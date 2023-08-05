@@ -35,11 +35,13 @@
                     <td>
                         <form action="/deletebrand/{{$value->id}}" method="post" onsubmit="validateDelete(event)">
                             @csrf
-                            <input type="submit" class='btn btn-outline-danger btn-sm col-6 mt-sm-2 mb-sm-2' name="btndelete" value="Delete Brand">
+                            <input type="submit" class='btn btn-outline-danger btn-sm col-sm-6 mt-2 mb-2  text-center'
+                                name="btndelete" value="Delete Brand">
                         </form>
                         <form action="/editbrand/{{$value->id}}" method="GET">
                             @csrf
-                            <input type="submit" class='btn btn-outline-warning btn-sm  text-dark col-6' name="btnedit" value="Update Brand">
+                            <input type="submit" class='btn btn-outline-warning btn-sm  text-dark col-sm-6'
+                                name="btnedit" value="Update Brand">
                         </form>
                     </td>
 
@@ -52,7 +54,7 @@
         </table>
     </div>
 </div>
-<div class="row m-sm-5 justify-content-center">
+<div class="row m-5 justify-content-center">
     <div class="col-sm-6 ">
         <a href="/addbrand" class="btn form-control" style="background-color:#2274A5;color:white">Add Brand</a>
     </div>

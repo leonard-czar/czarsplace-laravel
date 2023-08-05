@@ -18,8 +18,8 @@
             <h4 style="font-family: czars2; " class="">{{$product->watch_description}}</h4>
             <div style="color:rgba(0, 0, 0,0.8);" class="mb-4">&#8358;{{$product->watch_price}}</div>
 
-            <div class=""><input onclick="location.href = '/login';" name="buynow" id="addcart" style="border: 1px solid #fbd079; color:black;
-                background-color:#fbd079;font-weight:500px" value="BUY NOW" class="btn form-control mb-5 mt-1">
+            <div class=""><button onclick="location.href = '/login';" name="buynow" id="addcart" style="border: 1px solid #fbd079; color:black;
+                background-color:#fbd079;font-weight:500px" class="btn form-control mb-5 mt-1">BUY NOW</button>
             </div>
 
             <h5 style="font-family: czars2;text-align:center;">WATCH SPECIFICATIONS</h5>

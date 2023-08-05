@@ -101,7 +101,7 @@
         <h2 style="font-family: czars2;">Your cart is currently empty</h2>
     </div>
     </div>
-    <div class="text-center mb-sm-5" style="font-family: czars2;"><a href="{{ route('dashboard')}}"
+    <div class="text-center mb-3" style="font-family: czars2;"><a href="{{ route('dashboard')}}"
             style="text-decoration:underline ;color:blue;">start shopping</a></div>
 
 

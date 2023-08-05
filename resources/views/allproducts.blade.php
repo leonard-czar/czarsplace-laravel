@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row m-sm-3">
-        <div class="col-sm mb-sm-2 mt-sm-2 table-responsive">
+        <div class="col-sm mb-2 mt-2 table-responsive">
             <table class="table table-hover table-striped col-sm table-responsive" style="font-size:1.2vw ;">
                 <thead class="table-dark col-sm">
                     <tr>
@@ -52,7 +52,9 @@
                     @foreach ($products as $value)
 
                     <tr class="col-lg">
-                        <td><?php echo  $kanta++ ?></td>
+                        <td>
+                            <?php echo  $kanta++ ?>
+                        </td>
                         <td><img src="{{$value->watch_image}}" alt="" width="45" class="img-fluid"></td>
                         <td> {{$value->id}} </td>
                         <td> {{$value->watch_name}}</td>
@@ -81,11 +83,13 @@
                         <td>
                             <form action="/deleteproduct/{{$value->id}}" method="POST" onsubmit="Deleteproduct(event)">
                                 @csrf
-                                <input type="submit" class='btn btn-outline-danger btn-sm  col-12' name="btndelete" value="Delete">
+                                <input type="submit" class='btn btn-outline-danger btn-sm  col-12' name="btndelete"
+                                    value="Delete">
                             </form>
                             <form action="/editproduct/{{$value->id}}" method="GET">
                                 @csrf
-                                <input type="submit" class='btn btn-outline-primary btn-sm mt-sm-2 mb-sm-2 col-12 ' name="btnedit" value="Edit">
+                                <input type="submit" class='btn btn-outline-primary btn-sm mt-2 mb-2 col-12 '
+                                    name="btnedit" value="Edit">
                             </form>
 
                         </td>
@@ -101,7 +105,7 @@
             </table>
         </div>
     </div>
-    <div class="row m-sm-5 justify-content-center">
+    <div class="row m-5 justify-content-center">
         <div class="col-sm-6 ">
             <a href="/addproduct" class="btn btn-primary form-control">Add Product</a>
         </div>
