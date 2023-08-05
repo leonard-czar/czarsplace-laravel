@@ -56,7 +56,7 @@
   <div class="row">
     @foreach ($brand->products as $product)
 
-    <div class="col-sm col-lg mb-5 ">
+    <div class="col-sm-1 col-lg col-md-3 col-xl mb-5 ">
       <form action="/watchspec/{{$product->id}}" method='GET' style="text-align: center;">
         <div class=" " style="width: 100%;height:auto"><img src="{{$product->watch_image}}" alt=""
             class="img-responsive-sm img-fluid">

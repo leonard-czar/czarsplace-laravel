@@ -1,6 +1,7 @@
 @if ($message = Session::get('success'))
 
-<div class="alert alert-success alert-dismissible fade show text-center col-sm " role="alert" style="font-family: czars2;">
+<div class="alert alert-success alert-dismissible fade show text-center col-sm " role="alert"
+  style="font-family: czars2;">
 
   <strong>{{ $message }}</strong>
 
@@ -8,9 +9,9 @@
 
 </div>
 
-@endif 
+@endif
 
-    
+
 
 @if ($message = Session::get('error'))
 
@@ -24,7 +25,7 @@
 
 @endif
 
-     
+
 
 @if ($message = Session::get('warning'))
 
@@ -50,7 +51,7 @@
 
 @endif
 
-     
+
 
 @if ($message = Session::get('info'))
 
@@ -64,7 +65,7 @@
 
 @endif
 
-    
+
 
 {{-- @if ($errors->any())
 
@@ -77,4 +78,3 @@
 </div>
 
 @endif --}}
-

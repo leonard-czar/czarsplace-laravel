@@ -254,16 +254,17 @@ color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
                         <a href="http://facebook.com" target="_blank" style="text-decoration: none; "> <img
                                 src="{{asset('images/fb1.png')}}" alt="facebook page" width="40" class="socials"></a>
 
-                        <a href="http://twitter.com" target="_blank" style="text-decoration: none;"><img
+                        <a href="http://twitter.com/leonard_czar" target="_blank" style="text-decoration: none;"><img
                                 src="{{asset('images/twitter2.png')}}" alt="twitter page" width="40" class="socials">
                         </a>
 
-                        <a href="http://instagram.com" target="_blank" style="text-decoration: none;">
+                        <a href="http://instagram.com/leonard_czar" target="_blank" style="text-decoration: none;">
                             <img src="{{asset('images/ig1.png')}}" alt="instagram page" width="40" class="socials">
                         </a>
                         <!--WHATSAPP-->
 
-                        <a id="whatsapp" href="http://whatsapp.com" target="_blank" style="text-decoration: none;">
+                        <a id="whatsapp" href="https://wa.me/08182281634" target="_blank"
+                            style="text-decoration: none;">
                             <div class="mt-2 me-2 opacity-50 "><span id="spanwhatsapp">
                                     <b>chat with us</b> </span></div>
                             <img src="{{asset('images/wats2.png')}}" alt="whatsapp" width="40"

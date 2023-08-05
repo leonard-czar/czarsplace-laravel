@@ -20,7 +20,8 @@
         {{$product->watch_description}}</b></div>
     <form action="/index_watchspec/{{$product->id}}" method="GET" style="text-align: center;">
       @csrf
-      <input type="submit" value="{{$product->watch_name}}" class="btn btn-sm col-sm-10 mt-sm-2" style="background-color: #050C24;color:burlywood;font-size: 1.2vw;" name="btnsubmit">
+      <input type="submit" value="{{$product->watch_name}}" class="btn btn-sm col-sm-10 mt-sm-2"
+        style="background-color: #050C24;color:burlywood;font-size: 1.2vw;" name="btnsubmit">
     </form>
   </div>
 

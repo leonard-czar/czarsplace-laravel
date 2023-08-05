@@ -24,21 +24,22 @@
                 @php
                 $kanta = 1;
                 @endphp
-                @foreach($orders as $detail)            
-                    <tr>
-                        <td>{{$kanta++ }} </td>
-                        <td>{{$detail->id}}  </td>
-                        <td>{{$detail->product_id}}  </td>
-                        <td>{{$detail->qty}} </td>
-                        <td>{{$detail->unit_price}} </td>
-                        <td>{{$detail->total}} </td>
-                    </tr>
-                    @endforeach
+                @foreach($orders as $detail)
+                <tr>
+                    <td>{{$kanta++ }} </td>
+                    <td>{{$detail->id}} </td>
+                    <td>{{$detail->product_id}} </td>
+                    <td>{{$detail->qty}} </td>
+                    <td>{{$detail->unit_price}} </td>
+                    <td>{{$detail->total}} </td>
+                </tr>
+                @endforeach
 
 
             </tbody>
         </table>
     </div>
-    <div class="text-center mb-3" style="text-decoration:underline"><a href="/allorders" class="text-primary">Back</a></div>
+    <div class="text-center mb-3" style="text-decoration:underline"><a href="/allorders" class="text-primary">Back</a>
+    </div>
 </div>
 @endsection
