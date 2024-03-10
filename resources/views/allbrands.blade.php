@@ -9,6 +9,8 @@
         <h3>Featured Brands</h3>
     </div>
 </div>
+
+
 <div class="row justify-content-center">
     <div class="col-sm-10 m-3 table-responsive">
         <table class="table table-hover table-striped">
