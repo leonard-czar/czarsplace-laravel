@@ -13,7 +13,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicon_io/favicon-32x32.png')}}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon_io/favicon-16x16.png')}}">
   <link rel="manifest" href="{{asset('favicon_io/site.webmanifest')}}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js">
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"> --}}
   <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.css')}}">
   <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
   <title> @yield('title') {{config('app.name',"Czar's Place")}} Haven for luxury wristwatches</title>
@@ -21,17 +21,17 @@
   <style>
     @font-face {
       font-family: 'czars';
-      src: url('Unica_One/UnicaOne-Regular.ttf');
+      src: url('unica_one/unicaone-regular.ttf');
     }
 
     @font-face {
       font-family: 'czars3';
-      src: url('Pacifico/Pacifico-Regular.ttf');
+      src: url('pacifico/pacifico-regular.ttf');
     }
 
     @font-face {
       font-family: 'czars2';
-      src: url('Padauk/Padauk-Regular.ttf');
+      src: url('padauk/padauk-regular.ttf');
     }
 
     #brandname {
