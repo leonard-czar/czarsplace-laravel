@@ -11,8 +11,7 @@ class BrandController extends Controller
     //
     public function insertBrand(Request $request)
     {
-        //validate using inbluit function validate()
-        $validated = $request->validate([
+         $request->validate([
             'brand_name' => 'required',
             'brand_image' => 'required'
         ]);
@@ -82,6 +81,6 @@ class BrandController extends Controller
     {
         $brand = Brand::find($id);
         $brand->delete();
-        return redirect()->action([BrandController::class, 'ViewIt']);
+        return redirect()->action([BrandController::class, 'viewIt']);
     }
 }
