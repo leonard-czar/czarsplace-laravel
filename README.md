@@ -111,14 +111,16 @@ the page.
 <br>
 
 *Product Information*
+
 ![Product info](/public/images/ReadMe/product-info.png)
 <br>
 
 *Cart For Customer*
+
 ![cart](/public/images/ReadMe/cart.png)
 <br>
 
-*Check Outv page*
+*Check Out page*
 
 ![Check Out](/public/images/ReadMe/checkout.png)
 <br>
@@ -153,7 +155,7 @@ the page.
 ![View all products](/public/images/ReadMe/view-product.png)
 <br>
 
-*Manage Product For Admin*
+*Add Product For Admin*
 
 ![Add product](/public/images/ReadMe/add-product1.png)
 <hr>
@@ -163,6 +165,12 @@ the page.
 <br>
 
 *Order Status For Admin*
+
+![View all orders](/public/images/ReadMe/view-orders.png)
+
+<br>
+
+*View all Brands For Admin*
 
 ![View all Brands](/public/images/ReadMe/view-brands.png)
 
