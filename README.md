@@ -93,65 +93,65 @@ the page.
 ### Customer
 
 *Login For Customer*
-![log](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/login.png)
+![log](/public/images/ReadMe/login.png)
 <br>
 
 *Sign Up For Customer*
-![Signup](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/register.png)
+![Signup](/public/images/ReadMe/register.png)
 <br>
 
 *Home Page For Customer*
-![h1](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/homepage1)
-![h2](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/homepage2.png)
+![h1](/public/images/ReadMe/homepage1)
+![h2](/public/images/ReadMe/homepage2.png)
 <br>
 
 *Product Information*
-![Product info](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/product-info.png)
+![Product info](/public/images/ReadMe/product-info.png)
 <br>
 
 *Cart For Customer*
-![cart](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/cart.png)
+![cart](/public/images/ReadMe/cart.png)
 <br>
 
 *Check Out*
-![Check Out](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/checkout.png)
+![Check Out](/public/images/ReadMe/checkout.png)
 <br>
 
 *Paystack payment gateway*
-![Paystack Geteway](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/paystack1.png)
+![Paystack Geteway](/public/images/ReadMe/paystack1.png)
 <p>
-(https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/paystack2.png)
+(/public/images/ReadMe/paystack2.png)
 <br>
 
 <br>
 *Customer Profile*
-![all orders](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/myorders.png)
+![all orders](/public/images/ReadMe/myorders.png)
 
 
 ### Admin
 
-![login admin](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/login.png)
+![login admin](/public/images/ReadMe/login.png)
 *Login For Admin*
 <br>
 
-![admin Dashboard/Home](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/admin-dash.png)
+![admin Dashboard/Home](/public/images/ReadMe/admin-dash.png)
 *Admin Home*
 <br>
 
-![View all products](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/view-product.png)
+![View all products](/public/images/ReadMe/view-product.png)
 *view Product For Admin*
 <br>
 
 *Manage Product For Admin*
-![Add product](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/add-product1.png)
+![Add product](/public/images/ReadMe/add-product1.png)
 <hr>
-(https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/add-product2.png)
+(/public/images/ReadMe/add-product2.png)
 <br>
 
-![View all Brands](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/view-brands.png)
+![View all Brands](/public/images/ReadMe/view-brands.png)
 *Order Status For Admin*
 <br>
 
-![All user](https://github.com/leonard-czar/czarsplace-laravel/tree/laravel/public/images/ReadMe/view-users.png)
+![All user](/public/images/ReadMe/view-users.png)
 *All User List*
 
