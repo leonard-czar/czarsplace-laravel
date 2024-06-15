@@ -1,66 +1,119 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+[](http://imgur.com/t3teAxi.png)
+### :handbag: A simple RESTful API for Purchases and Products
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Github All Releases](https://img.shields.io/github/downloads/ovflowd/ecommerce/total.svg)]() [![GitHub release](https://img.shields.io/github/release/ovflowd/ecommerce.svg)]() [![Build Status](https://travis-ci.org/ovflowd/ecommerce.svg?branch=master)](https://travis-ci.org/ovflowd/ecommerce) [![Codecov](https://img.shields.io/codecov/c/github/ovflowd/ecommerce.svg)]() [![Docker Pulls](https://img.shields.io/docker/pulls/sant0ro/products-api.svg)]() [![Docker Pulls](https://img.shields.io/docker/pulls/sant0ro/purchase-api.svg)]()
 
-## About Laravel
+## Deploy
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<a href="https://azuredeploy.net/"><img src="http://azuredeploy.net/deploybutton.png" height="32"></a> <a href="https://bluemix.net/deploy?repository=https://github.com/sant0ro/eCommerce"><img src="https://bluemix.net/deploy/button.png" height="32"></a>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<b>Products Features</b>
 
-## Learning Laravel
+| Feature  |  Coded?       | Description  |
+|----------|:-------------:|:-------------|
+| Add a Product | &#10004; | Ability of Add a Product on the System |
+| List Products | &#10004; | Ability of List Products |
+| Edit a Product | &#10004; | Ability of Edit a Product |
+| Delete a Product | &#10004; | Ability of Delete a Product |
+| Stock | &#10004; | Ability of Update the Stock |
+| Stock History | &#10004; | Ability to see the Stock History |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<b>Purchase Features</b>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+| Feature  |  Coded?       | Description  |
+|----------|:-------------:|:-------------|
+| Create a Cart | &#10004; | Ability of Create a new Cart |
+| See Cart | &#10004; | Ability to see the Cart and it items |
+| Remove a Cart | &#10004; | Ability of Remove a Cart |
+| Add Item | &#10004; | Ability of add a new Item on the Cart |
+| Remove a Item | &#10004; | Ability of Remove a Item from the Cart |
+| Checkout | &#10004; | Ability to Checkout |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# eCommerce
 
-## Laravel Sponsors
+**eCommerce** it's an open source (test scenario) software made to create a easy and simple "Shop" API, where you have two micro services, one the **Products API** that stores and handles everything Related to Stock and Products. And the **Purchase API** where you can create orders (cart's) and checkout items.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+The purpose of this repository it's for education and test. But the code it's being coded in a proper way.
 
-### Premium Partners
+## Documentation
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+**eCommerce** has a full API documentation made with [Swagger](https://swagger.io), you can check it by accessing [this](http://santoro.pw/eCommerce) link.
 
-## Contributing
+If you have any **Issue** or bug you can submit a new Issue by accessing [this](issues/) link.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+If you want to **Contribute** you can submit a Pull Request, remember to READ the [Contributing Guide](CONTRIBUTING.md)
 
-## Code of Conduct
+## Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* **eCommerce** it's splitted into two standalone RESTful API's, so you can run it on whatever port you want. Installing 
+* **eCommerce** it's easy, the tutorial above will explain to you.
+* **eCommerce** uses Groovy `2.4` and Grails `3.2.11`.
 
-## Security Vulnerabilities
+You can run **eCommerce** in different ways. You can go to the [Releases Page](releases/) and download the source code of the latest release, or a bundled .war or a standalone java application (.jar).
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**It's recommend see the notes on [this](#notes) section.**
 
-## License
+### Development
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+You can attach the .war in WebServers like **Tomcat** using the Management Interface.
+
+If you want run the standalone `.jar` just download it, and open your CMD/Terminal and write:
+
+**If you want RUN the Products API**
+
+`java -jar ecommerce-products-api-XXX.jar` **OR** `./products-api/grailsw run-app`
+
+**If you want RUN the Purchases API**
+
+`java -jar ecommerce-purchase-api-XXX.jar` **OR** `./purchase-api/grailsw run-app`
+
+You also can build from the sources by running the **Grails Console**, just went to one of the API's folder `purchase-api` or `products-api` and write on your CMD/Terminal the following:
+
+`grailsw assemble`
+
+If you want to run it in development scenario, you can also do it by **building** the sources. You have two manner to do it. You can Gradle or directly Grails. Both `products-api` and `purchase-api` comes with Groovy, Grails and Gradle standalone packages. So you can run it without the need of installing they.
+
+**Option #1 - Run by Gradle**
+
+`gradlew bootRun`
+
+**Option #2 - Run by Grailsw**
+
+`grailsw run-app`
+
+### Production
+
+Production Environments are focused in being ready. That means, you just need execute the Jar File.
+
+In the Production Environment all eCommerce API's are configured to work with **MySQL** in two databases; **productsAPI** and **purchaseAPI** and to work with a default **username and password** combination:
+
+**Note.:** Remember importing each SQL files, if using MySQL for Production. You can find them inside `products-api/src/main/sql/` and `purchase-api/src/main/sql/`
+
+* **Username:** commerce
+* **Password:** commerceapi
+* **Database:** productsapi & purchaseapi
+* **Port:** 3306
+
+You can change those credentials in the `application.yaml` file. In production environments **you need import the database schema** before running the software. Both `products-api` and `purchase-api` DDL files are available on [this](sql/) folder.
+
+### Notes
+
+**Note.:** By default `products-api` runs on port 8080 and `purchase-api` on port 8090.
+
+**Note.:** In all Development and Test Scenarios, eCommerce uses **H2** in-memory Database.
+
+**Note.:** You can change your database credentials both for development/test and production scenarios in the `app-config.yml` available on each API sources root. Those configuration files can be used also externally, after building the `.jar`
+
+**Note.:** You also can clean the sources and rebuild the sources by running `grailsw clean`
+
+## Running Test Cases
+
+You can easily run the **Test Cases** using the standalone Grails package built-in with both the API's. Just went to the home folder of one of them (`products-api` or `purchase-api`). And write on your CMD/Terminal:
+
+`grailsw test-app`
+
+## Credits
+
+This development/educational scenario was coded and created by [Claudio Santoro](http://santoro.pw) unde the [GNU GPL v3](LICENSE) License. The objective of this repository it's as practical test of RESTful API's with Java + Groovy.
