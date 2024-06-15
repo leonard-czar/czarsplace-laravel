@@ -93,16 +93,21 @@ the page.
 ### Customer
 
 *Login For Customer*
+
 ![log](/public/images/ReadMe/login.png)
 <br>
 
 *Sign Up For Customer*
+
 ![Signup](/public/images/ReadMe/register.png)
 <br>
 
 *Home Page For Customer*
+
 ![Home page](/public/images/ReadMe/homepage1.png)
-![Home page products](/public/images/ReadMe/homepage2.png)
+<br>
+
+![Home page](/public/images/ReadMe/homepage2.png)
 <br>
 
 *Product Information*
@@ -113,11 +118,13 @@ the page.
 ![cart](/public/images/ReadMe/cart.png)
 <br>
 
-*Check Out*
+*Check Outv page*
+
 ![Check Out](/public/images/ReadMe/checkout.png)
 <br>
 
 *Paystack payment gateway*
+
 ![Paystack Geteway](/public/images/ReadMe/paystack1.png)
 <br>
 
@@ -132,18 +139,22 @@ the page.
 
 ### Admin
 *Login For Admin*
+
 ![login admin](/public/images/ReadMe/login.png)
 <br>
 
 *Admin Home*
+
 ![admin Dashboard/Home](/public/images/ReadMe/admin-dash.png)
 <br>
 
 *view Product For Admin*
+
 ![View all products](/public/images/ReadMe/view-product.png)
 <br>
 
 *Manage Product For Admin*
+
 ![Add product](/public/images/ReadMe/add-product1.png)
 <hr>
 <br>
@@ -151,11 +162,14 @@ the page.
 ![Add product page](/public/images/ReadMe/add-product2.png)
 <br>
 
-![View all Brands](/public/images/ReadMe/view-brands.png)
 *Order Status For Admin*
+
+![View all Brands](/public/images/ReadMe/view-brands.png)
+
 <br>
 
 *All User List*
+
 ![All user](/public/images/ReadMe/view-users.png)
 
 
