@@ -101,8 +101,8 @@ the page.
 <br>
 
 *Home Page For Customer*
-![h1](/public/images/ReadMe/homepage1)
-![h2](/public/images/ReadMe/homepage2.png)
+![Home page](/public/images/ReadMe/homepage1.png)
+![Home page products](/public/images/ReadMe/homepage2.png)
 <br>
 
 *Product Information*
@@ -119,39 +119,43 @@ the page.
 
 *Paystack payment gateway*
 ![Paystack Geteway](/public/images/ReadMe/paystack1.png)
-<p>
-(/public/images/ReadMe/paystack2.png)
 <br>
 
+![Paystack Geteway](/public/images/ReadMe/paystack2.png)
 <br>
+<br>
+
 *Customer Profile*
+
 ![all orders](/public/images/ReadMe/myorders.png)
 
 
 ### Admin
-
-![login admin](/public/images/ReadMe/login.png)
 *Login For Admin*
+![login admin](/public/images/ReadMe/login.png)
 <br>
 
-![admin Dashboard/Home](/public/images/ReadMe/admin-dash.png)
 *Admin Home*
+![admin Dashboard/Home](/public/images/ReadMe/admin-dash.png)
 <br>
 
-![View all products](/public/images/ReadMe/view-product.png)
 *view Product For Admin*
+![View all products](/public/images/ReadMe/view-product.png)
 <br>
 
 *Manage Product For Admin*
 ![Add product](/public/images/ReadMe/add-product1.png)
 <hr>
-(/public/images/ReadMe/add-product2.png)
+<br>
+
+![Add product page](/public/images/ReadMe/add-product2.png)
 <br>
 
 ![View all Brands](/public/images/ReadMe/view-brands.png)
 *Order Status For Admin*
 <br>
 
-![All user](/public/images/ReadMe/view-users.png)
 *All User List*
+![All user](/public/images/ReadMe/view-users.png)
+
 
