@@ -7,7 +7,7 @@ The application also come with an admin dashboard where administrators of the we
 
 ## Application Objective
 
-The purpose of the the project is to create a e-commerce app for everyone interested in shopping online. Layout is simple and clear. Project is accesible through all modern browsers on both desktop and mobile devices. For build the front-end functionality CSS, HTML, Jquery and JavaScript is used and for back-end logic, PHP with Laravel framework is used. As it's e-commerce app payments options is available by using Paystack API.
+The purpose of the the project is to create an e-commerce app for everyone interested in shopping online. Layout is simple and clear. Project is accesible through all modern browsers on both desktop and mobile devices. For build the front-end functionality CSS, HTML, Jquery and JavaScript is used and for back-end logic, PHP with Laravel framework is used. As it's e-commerce app payments options is available by using Paystack API.
 
 #### User Stories
 
@@ -48,7 +48,7 @@ Project consist following pages:
 ## Features
 
 The app can be accessible with or without user registration, but in that case some features will be available after registration only (checkout,cart,my account).
-Anyone is able to perform search, view results, all details about selected product.
+Anyone is able to perform search, view results as well as all details about selected product.
 
 ### General Features
 
@@ -65,10 +65,14 @@ Anyone is able to perform search, view results, all details about selected produ
 
 
 #### Admin Features
+
 - Login
 -  View all product information
 -  View all orders
--  Add, delete, and modify product information
+- View order details
+- View all Users
+- view all product categories
+-  Add, delete, and modify product and brand information
 - After every successful Add, Edit, delete confirmation message will be shown on corner of
 the page.
 -  Logout
