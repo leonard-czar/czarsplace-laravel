@@ -1,26 +1,76 @@
-name: Deploy
+# name: Deploy
 
-# Trigger the workflow on push and
-# pull request events on the production branch
+# # Trigger the workflow on push and
+# # pull request events on the production branch
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
+
+# # Authenticate to the the server via ssh
+# # and run our deployment script
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Deploy to server
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.SERVER_IP }}
+#           username: ${{secrets.SERVER_USERNAME}}
+#           key: ${{secrets.SERVER_PRIVATE_KEY}}
+#           script: "cd /www/czarsplace.cybercraftsmen.tech/czarsplace-laravel && .scripts/deploy.sh"
+
+
+name: Laravel CI/CD
+
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
-# Authenticate to the the server via ssh
-# and run our deployment script
 jobs:
-  deploy:
+  laravel-tests:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{secrets.SERVER_USERNAME}}
-          key: ${{secrets.SERVER_PRIVATE_KEY}}
-          script: "cd /www/czarsplace.cybercraftsmen.tech/czarsplace-laravel && .scripts/deploy.sh"
+    - uses: actions/checkout@v2
+    
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+    
+    # - name: Install Dependencies
+    #   run: composer install --prefer-dist --no-progress --no-suggest
+    
+    # - name: Run Tests
+    #   run: php artisan test
+
+  laravel-deploy:
+    needs: laravel-tests
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Deploy Laravel to Kali Linux server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_PRIVATE_KEY }}
+        script: |
+          cd /www/czarsplace.cybercraftsmen.tech/czarsplace-laravel
+          git pull origin main
+          composer install --no-interaction --prefer-dist --optimize-autoloader
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          # Add any additional deployment steps here
