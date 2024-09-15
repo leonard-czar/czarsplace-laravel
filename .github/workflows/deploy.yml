@@ -1,0 +1,26 @@
+name: Deploy
+
+# Trigger the workflow on push and
+# pull request events on the production branch
+on:
+  push:
+    branches:
+      - czarsplace-laravel
+  pull_request:
+    branches:
+      - czarsplace-laravel
+
+# Authenticate to the the server via ssh
+# and run our deployment script
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{secrets.SERVER_USERNAME}}
+          key: ${{secrets.SERVER_PRIVATE_KEY}}
+          script: "cd /www/czarsplace.cybercraftsmen.tech/czarsplace-laravel && .scripts/deploy.sh"
