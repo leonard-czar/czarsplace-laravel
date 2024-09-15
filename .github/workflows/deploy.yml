@@ -5,10 +5,10 @@ name: Deploy
 on:
   push:
     branches:
-      - czarsplace-laravel
+      - main
   pull_request:
     branches:
-      - czarsplace-laravel
+      - main
 
 # Authenticate to the the server via ssh
 # and run our deployment script
