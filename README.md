@@ -183,5 +183,3 @@ the page.
 *All User List*
 
 ![All user](/public/images/ReadMe/view-users.png)
-
-
