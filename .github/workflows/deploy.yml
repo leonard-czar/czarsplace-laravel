@@ -65,8 +65,8 @@ jobs:
 
 
 
-    - name: Test SSH Connection
-      run: ssh -i ~/.ssh/id_rsa ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "echo SSH connection successful"
+    # - name: Test SSH Connection
+    #   run: ssh -i ~/.ssh/id_rsa ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "echo SSH connection successful"
 
     
     
