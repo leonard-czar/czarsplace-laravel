@@ -53,9 +53,7 @@ jobs:
         ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
         echo "StrictHostKeyChecking no" >> ~/.ssh/config
 
-    - name: Test SSH Connection
-      run: |
-        ssh -vvv -i ~/.ssh/id_rsa ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "echo SSH connection successful"
+
      - name: Test SSH Connection
        run: |
         ssh -i ~/.ssh/id_rsa ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "echo SSH connection successful"
