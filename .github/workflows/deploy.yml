@@ -45,6 +45,13 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
+     - name: Setup SSH
+       run: | 
+         mkdir -p ~/.ssh
+         echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+         chmod 600 ~/.ssh/id_rsa
+         ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+         echo "StrictHostKeyChecking no" >> ~/.ssh/config
 
 
     - name: Test SSH Connection
