@@ -26,7 +26,7 @@
 #           script: "cd /www/czarsplace.cybercraftsmen.tech/czarsplace-laravel && .scripts/deploy.sh"
 
 
-name: Laravel CI/CD
+name: Czarsplace CI/CD
 
 on:
   push:
@@ -45,14 +45,18 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
-    
+
+    - name: Test SSH Connection
+      run: |
+        ssh -vvv -i ~/.ssh/id_rsa ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "echo SSH connection successful"
+
     # - name: Install Dependencies
     #   run: composer install --prefer-dist --no-progress --no-suggest
-    
+
     # - name: Run Tests
     #   run: php artisan test
 
-  laravel-deploy:
+  czarsplace-deploy:
     needs: laravel-tests
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -67,7 +71,7 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_PRIVATE_KEY }}
         script: |
-          cd /www/czarsplace.cybercraftsmen.tech/czarsplace-laravel
+          cd  /home/lebechi/www/czarsplace.cybercraftsmen.tech/czarsplace-laravel
           git pull origin main
           composer install --no-interaction --prefer-dist --optimize-autoloader
           php artisan migrate --force
