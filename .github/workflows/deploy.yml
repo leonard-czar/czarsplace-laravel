@@ -47,17 +47,28 @@ jobs:
         php-version: '8.2'
 
 
+    # - name: Setup SSH
+    #   run: | 
+    #     mkdir -p ~/.ssh
+    #     echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+    #     chmod 600 ~/.ssh/id_rsa
+    #     ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+    #     echo "StrictHostKeyChecking no" >> ~/.ssh/config
+
     - name: Setup SSH
       run: | 
         mkdir -p ~/.ssh
-        echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.SERVER_SSH_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
-        echo "StrictHostKeyChecking no" >> ~/.ssh/config
+        echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+
 
 
     - name: Test SSH Connection
       run: ssh -i ~/.ssh/id_rsa ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "echo SSH connection successful"
+
+    
     
 
     # - name: Install Dependencies
