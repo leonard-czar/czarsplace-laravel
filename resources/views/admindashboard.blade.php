@@ -1,57 +1,75 @@
 @extends('layouts.admin')
 
-@section('title','Admin Dashboard |')
+@section('title', 'Admin Dashboard |')
+
 @section('content')
+    <div class="container-fluid czp-admin-page px-3 px-md-4 py-4">
+        <div class="admin-dash-welcome">
+            <p class="admin-dash-welcome__greeting">Signed in as administrator</p>
+            <h1 class="admin-dash-welcome__name">Welcome back, <span class="admin-dash-welcome__accent">{{ $username }}</span></h1>
+        </div>
 
-<div class="row">
-    <div class="col-sm text-center alert alert-info">
-        <span style="font-size: 1.7vw;">Hi </span>
-        <span>
-            {{$username}}
-        </span>
+        <div class="row admin-stat-grid row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-5 g-4 justify-content-center">
+            <div class="col">
+                <a href="{{ route('allproduct') }}" class="admin-stat-card admin-stat-card--products d-block">
+                    <div class="admin-stat-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <div class="admin-stat-card__body">
+                        <span class="admin-stat-card__label">Available products</span>
+                        <span class="admin-stat-card__value">{{ number_format($productCount) }}</span>
+                        <span class="admin-stat-card__hint">Manage products →</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{{ route('allbrands') }}" class="admin-stat-card admin-stat-card--brands d-block">
+                    <div class="admin-stat-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="admin-stat-card__body">
+                        <span class="admin-stat-card__label">Featured brands</span>
+                        <span class="admin-stat-card__value">{{ number_format($brandCount) }}</span>
+                        <span class="admin-stat-card__hint">View brands →</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{{ route('allorders') }}" class="admin-stat-card admin-stat-card--orders d-block">
+                    <div class="admin-stat-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                    <div class="admin-stat-card__body">
+                        <span class="admin-stat-card__label">Total orders</span>
+                        <span class="admin-stat-card__value">{{ number_format($orderCount) }}</span>
+                        <span class="admin-stat-card__hint">All orders →</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{{ route('allusers') }}" class="admin-stat-card admin-stat-card--customers d-block">
+                    <div class="admin-stat-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="admin-stat-card__body">
+                        <span class="admin-stat-card__label">Customers</span>
+                        <span class="admin-stat-card__value">{{ number_format($userCount) }}</span>
+                        <span class="admin-stat-card__hint">User accounts →</span>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{{ route('allorders') }}" class="admin-stat-card admin-stat-card--payments d-block">
+                    <div class="admin-stat-card__icon" aria-hidden="true">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                    </div>
+                    <div class="admin-stat-card__body">
+                        <span class="admin-stat-card__label">Payment records</span>
+                        <span class="admin-stat-card__value">{{ number_format($paymentCount) }}</span>
+                        <span class="admin-stat-card__hint">Linked to orders →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
-</div>
-{{-- @if(isset($_REQUEST['addproduct']))
-<div class="row mt-3 mb-3">
-    <div class="col-sm text-center alert alert-success">
-        <span style="font-size: 1.7vw;">Product Added Successfully</span>
-    </div>
-</div>
-@endif --}}
-<div class="container-fluid">
-    <div class="row justify-content-center m-5">
-        <div class="col-sm-2 m-3 text-center p-2 bg-primary text-light"
-            style="box-shadow:2px 3px 6px #050C24;height:100px ">
-            <div> Available Products</div>
-            <hr>
-            <div> {{$products->count()}}</div>
-        </div>
-        <div class="col-sm-2  m-3 text-center p-2 text-light"
-            style="box-shadow:2px 3px 6px #050C24; background-color:#2274A5 ">
-            <div>Featured Brands</div>
-            <hr>
-            <div>{{$brands->count()}} </div>
-
-        </div>
-        <div class="col-sm-2  m-3 text-center p-2 text-light"
-            style="box-shadow:2px 3px 6px #050C24;background-color:#E8AA14 ">
-            <div>Total Orders</div>
-            <hr>
-            <div>{{$orders->count()}} </div>
-        </div>
-        <div class="col-sm-2  m-3 text-center p-2 text-light"
-            style="box-shadow:2px 3px 6px #050C24;background-color:#47A025 ">
-            <div>Customers</div>
-            <hr>
-            <div>{{$users->count()}} </div>
-        </div>
-        <div class="col-sm-2 m-3 text-center p-2 bg-success text-light"
-            style="box-shadow:2px 3px 6px #050C24;height:100px ">
-            <div>Total Payment</div>
-            <hr>
-            <div>{{$payments->count()}} </div>
-        </div>
-    </div>
-</div>
-
 @endsection

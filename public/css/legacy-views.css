@@ -1,0 +1,89 @@
+/* Legacy Blade templates (resources/views/legacy) — moved from inline styles */
+.legacy-hero-row {
+    justify-content: center;
+    background-color: rgba(5, 12, 36, 0.7);
+    z-index: -1;
+}
+
+.legacy-carousel-cap--dark {
+    background-color: rgb(47, 49, 59);
+    text-align: inherit;
+    width: max-content;
+    box-shadow: 7px 5px 17px 10px black;
+}
+
+.legacy-carousel-cap--gold {
+    background-color: rgb(251, 208, 121);
+    width: max-content;
+    border-radius: 2%;
+    box-shadow: 7px 5px 17px 1px rgb(251, 208, 121);
+}
+
+.legacy-carousel-cap--gold .bannertxt {
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.legacy-brand-offset {
+    margin-left: 50px;
+    position: relative;
+}
+
+.legacy-form-center {
+    text-align: center;
+}
+
+.legacy-product-desc {
+    text-align: center;
+    font-size: clamp(0.75rem, 1vw, 0.95rem);
+    color: rgba(0, 5, 0, 0.6);
+}
+
+.legacy-btn-dark-gold {
+    background-color: #050c24;
+    color: burlywood;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+}
+
+.legacy-text-center-muted {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.legacy-col-center {
+    text-align: center;
+}
+
+.legacy-btn-dark-gold-sm {
+    background-color: #050c24;
+    color: burlywood;
+}
+
+.legacy-link-underline {
+    text-decoration: underline;
+}
+
+.legacy-watchspec-desc {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.legacy-watchspec-btn-cart {
+    border: 1px solid #fbd079;
+    color: black;
+    background-color: #fbd079;
+    font-weight: 500;
+}
+
+.legacy-watchspec-spec-title {
+    font-family: var(--czp-font-sans, Georgia, serif);
+    text-align: center;
+}
+
+.legacy-watchspec-spec-list {
+    list-style-type: square;
+    font-family: var(--czp-font-sans, Georgia, serif);
+    align-items: inherit;
+}
+
+.legacy-watch-title {
+    font-family: var(--czp-font-sans, Georgia, serif);
+}

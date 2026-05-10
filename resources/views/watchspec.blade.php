@@ -1,73 +1,78 @@
 @extends('layouts.portal')
 
-@section('title','Watch Info |')
+@section('title', 'Watch details |')
+
 @section('content')
-<div class="container-fluid-sm">
-    <div class="row text-center">
-        <div>
+    @include('partials.portal-shop-ui')
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div>
+    @php
+        $brandName = $product->brand?->brandname ?? '—';
+    @endphp
 
-                <img src="{{asset($product->watch_image)}}" alt="" class="img-fluid">
+    <div class="container-fluid czp-page px-3 px-md-4 py-3">
+        <div class="row g-0 czp-watch-layout">
+            <div class="col-lg-6">
+                <div class="czp-watch-gallery">
+                    <img src="{{ $product->image_url }}" alt="{{ $product->watch_name }}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="czp-watch-detail">
+                    <p class="text-uppercase small mb-1 czp-watch-brand-eyebrow">{{ $brandName }}</p>
+                    <h1 class="czp-watch-title">{{ $product->watch_name }}</h1>
+                    <p class="czp-watch-tagline">{{ $product->watch_description }}</p>
+                    <p class="czp-watch-price">₦{{ number_format((float) $product->watch_price, 2) }}</p>
+
+                    <div class="czp-watch-form">
+                        <label for="qty">Quantity</label>
+                        <form action="{{ route('cart') }}" method="POST">
+                            @csrf
+                            <input type="number"
+                                name="qty"
+                                id="qty"
+                                value="{{ old('qty', 1) }}"
+                                min="1"
+                                step="1"
+                                class="form-control @error('qty') is-invalid @enderror mb-2"
+                                required>
+                            @error('qty')
+                                <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                            <input type="hidden" name="watchid" value="{{ $product->id }}">
+                            <button type="submit" name="buynow" class="czp-btn-add-cart mt-2">Add to cart</button>
+                        </form>
+                    </div>
+
+                    <div class="czp-spec-box">
+                        <h3>Specifications</h3>
+                        <dl class="czp-spec-dl">
+                            <div><dt>Brand</dt><dd>{{ $brandName }}</dd></div>
+                            <div><dt>Collection</dt><dd>{{ $product->collection ?: '—' }}</dd></div>
+                            <div><dt>Reference</dt><dd>{{ $product->reference_number ?: '—' }}</dd></div>
+                            <div><dt>Gender</dt><dd>{{ $product->gender ?: '—' }}</dd></div>
+                            <div><dt>Movement</dt><dd>{{ $product->movement ?: '—' }}</dd></div>
+                            <div><dt>Dial</dt><dd>{{ $product->dial ?: '—' }}</dd></div>
+                            <div><dt>Bezel</dt><dd>{{ $product->Bezel ?: '—' }}</dd></div>
+                            <div><dt>Crystal</dt><dd>{{ $product->crystal ?: '—' }}</dd></div>
+                            <div><dt>Caliber</dt><dd>{{ $product->caliber ?: '—' }}</dd></div>
+                            <div><dt>Functions</dt><dd>{{ $product->watch_function ?: '—' }}</dd></div>
+                            <div><dt>Mechanism</dt><dd>{{ $product->mechanism ?: '—' }}</dd></div>
+                            <div><dt>Jewels</dt><dd>{{ $product->number_of_jewels ?: '—' }}</dd></div>
+                            <div><dt>Diameter</dt><dd>{{ $product->total_diameter ?: '—' }}</dd></div>
+                            <div><dt>Power reserve</dt><dd>{{ $product->power_reserve ?: '—' }}</dd></div>
+                            <div><dt>Parts</dt><dd>{{ $product->number_of_parts ?: '—' }}</dd></div>
+                            <div><dt>Frequency</dt><dd>{{ $product->frequency ?: '—' }}</dd></div>
+                            <div><dt>Bracelet</dt><dd>{{ $product->bracelet ?: '—' }}</dd></div>
+                            <div><dt>Clasp</dt><dd>{{ $product->clasp ?: '—' }}</dd></div>
+                            <div><dt>Water resistance</dt><dd>{{ $product->water_resistance ?: '—' }}</dd></div>
+                        </dl>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-sm-4 mt-3 p-4 p-lg-1">
-            <h4 style="font-family: czars2;">{{$product->watch_description}}</h4>
-            <div style="color:rgba(0, 0, 0,0.8);" class="mb-4">&#8358;{{$product->watch_price}}</div>
-            <div><label for="" class="mb-sm-1 ">Quantity</label>
-                <form action="{{route('cart')}}" method="POST">
-                    @csrf
-                    <input type="number" name="qty" id="qty" value="1"
-                        class="form-control @error('qty') is-invalid @enderror mb-2">
-                    @error('qty')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                    <input type="hidden" value="{{$product->watch_price}}" name="price">
-                    <input type="hidden" value="{{$product->id}}" name="watchid">
-                    <input type="submit" name="buynow" id="addcart" style="border: 1px solid #fbd079; color:black;
-     background-color:#fbd079;font-weight:500px" value="BUY NOW" class="btn form-control mb-5 mt-1">
 
-                </form>
-            </div>
-            <h5 style="font-family: czars2;text-align:center">WATCH SPECIFICATIONS</h5>
-
-
-            <ul style="list-style-type:square ;font-family: czars2;" class="mb-5">
-                <li>Brand: {{$product->brand['brandname']}}</li>
-                <li>Collection: {{$product->collection}}</li>
-                <li>Reference Number: {{$product->reference_number}}</li>
-                <li>Gender: {{$product->gender}}</li>
-                <li>Movement: {{$product->movement}}</li>
-                <li>Dial: {{$product->dial}}</li>
-                <li>Bezel: {{$product->Bezel}}</li>
-                <li>Crystal: {{$product->crystal}}</li>
-                <li>Caliber: {{$product->caliber}}</li>
-                <li>Watch Function: {{$product->watch_function}}</li>
-                <li>Mechanism: {{$product->mechanism}}</li>
-                <li>Number of Jewels: {{$product->number_of_jewels}}</li>
-                <li>Total Diameter: {{$product->total_diameter}}</li>
-                <li>Power Reserve: {{$product->power_reserve}}</li>
-                <li>Number of Parts:{{$product->number_of_parts}}</li>
-                <li>Frequency:{{$product->frequency}}</li>
-                <li>Bracelet: {{$product->bracelet}}</li>
-                <li>Clasp: {{$product->clasp}}</li>
-                <li>Water Resistance: {{$product->water_resistance}}</li>
-
-            </ul>
-        </div>
+        <p class="czp-back-link">
+            <a href="{{ route('home') }}">← Back to home</a>
+        </p>
     </div>
-</div>
-<div class="row">
-    <div class="col-sm text-center mb-3 mt-3">
-        <div style="text-decoration:underline ;"><a href="{{ route('dashboard')}}" class="text-primary">
-                << Back</a>
-        </div>
-    </div>
-</div>
 @endsection

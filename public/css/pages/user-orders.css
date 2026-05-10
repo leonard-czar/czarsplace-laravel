@@ -1,0 +1,223 @@
+﻿.user-orders-page {
+            width: 100%;
+            padding-bottom: 2.5rem;
+        }
+
+        .user-orders-hero {
+            background: linear-gradient(135deg, #050C24 0%, #0f1f4d 55%, #162a5e 100%);
+            border: 1px solid rgba(251, 208, 121, 0.22);
+            border-radius: 0.75rem;
+            padding: 1.35rem 1.5rem 1.5rem;
+            margin-bottom: 1.75rem;
+            box-shadow: 0 0.4rem 1.25rem rgba(5, 12, 36, 0.28);
+        }
+
+        .user-orders-hero h1 {
+            font-family: var(--czp-font-sans);
+            color: #fff;
+            font-size: clamp(1.35rem, 3vw, 1.75rem);
+            margin: 0 0 0.35rem;
+            font-weight: 600;
+        }
+
+        .user-orders-hero p {
+            font-family: var(--czp-font-sans);
+            color: rgba(255, 255, 255, 0.72);
+            margin: 0;
+            font-size: 0.92rem;
+        }
+
+        .user-order-card {
+            background: #fff;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(5, 12, 36, 0.08);
+            box-shadow: 0 0.25rem 1rem rgba(5, 12, 36, 0.08);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .user-order-card__head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 1.1rem 1.25rem;
+            background: linear-gradient(180deg, rgba(5, 12, 36, 0.04) 0%, rgba(5, 12, 36, 0.02) 100%);
+            border-bottom: 1px solid rgba(5, 12, 36, 0.07);
+        }
+
+        .user-order-card__id {
+            font-family: var(--czp-font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #050C24;
+            display: block;
+            letter-spacing: 0.02em;
+        }
+
+        .user-order-card__date {
+            font-family: var(--czp-font-sans);
+            font-size: 0.82rem;
+            color: rgba(5, 12, 36, 0.55);
+            margin-top: 0.2rem;
+        }
+
+        .user-order-badge {
+            font-family: var(--czp-font-sans);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.4rem 0.75rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .user-order-badge--complete {
+            background: rgba(45, 106, 79, 0.12);
+            color: #1b4332;
+            border: 1px solid rgba(45, 106, 79, 0.25);
+        }
+
+        .user-order-badge--pending {
+            background: rgba(232, 170, 20, 0.15);
+            color: #7c5a0a;
+            border: 1px solid rgba(232, 170, 20, 0.35);
+        }
+
+        .user-order-badge--other {
+            background: rgba(114, 28, 36, 0.1);
+            color: #721c24;
+            border: 1px solid rgba(114, 28, 36, 0.22);
+        }
+
+        .user-order-card__total {
+            padding: 0.65rem 1.25rem;
+            font-family: var(--czp-font-sans);
+            font-size: 1rem;
+            color: #050C24;
+            background: rgba(251, 208, 121, 0.12);
+            border-bottom: 1px solid rgba(5, 12, 36, 0.06);
+        }
+
+        .user-order-card__total strong {
+            color: #050C24;
+            font-size: 1.15rem;
+        }
+
+        .user-order-table {
+            font-family: var(--czp-font-sans);
+            font-size: 0.9rem;
+        }
+
+        .user-order-table thead th {
+            font-family: var(--czp-font-sans);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(5, 12, 36, 0.55);
+            border-bottom-width: 1px;
+            padding: 0.85rem 1rem;
+            background: rgba(5, 12, 36, 0.03);
+        }
+
+        .user-order-table tbody td {
+            padding: 0.85rem 1rem;
+            vertical-align: middle;
+            border-color: rgba(5, 12, 36, 0.06);
+        }
+
+        .user-order-thumb {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 0.45rem;
+            border: 1px solid rgba(5, 12, 36, 0.1);
+            background: rgba(5, 12, 36, 0.04);
+        }
+
+        .user-order-product-name {
+            font-family: var(--czp-font-sans);
+            font-size: 0.92rem;
+            color: #050C24;
+            font-weight: 500;
+        }
+
+        .user-order-product-name a {
+            color: #050C24;
+            text-decoration: none;
+        }
+
+        .user-order-product-name a:hover {
+            color: #2274A5;
+            text-decoration: underline;
+        }
+
+        .user-orders-empty {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: #fff;
+            border-radius: 0.75rem;
+            border: 1px dashed rgba(5, 12, 36, 0.15);
+            box-shadow: 0 0.2rem 0.75rem rgba(5, 12, 36, 0.05);
+        }
+
+        .user-orders-empty h2 {
+            font-family: var(--czp-font-sans);
+            color: #050C24;
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .user-orders-empty p {
+            font-family: var(--czp-font-sans);
+            color: rgba(5, 12, 36, 0.6);
+            margin-bottom: 1.25rem;
+            max-width: 22rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .user-orders-empty .btn-brand {
+            font-family: var(--czp-font-sans);
+            background: #050C24;
+            color: #fbd079;
+            border: none;
+            padding: 0.55rem 1.35rem;
+            border-radius: 0.4rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .user-orders-empty .btn-brand:hover {
+            background: #0f1f4d;
+            color: #fbd079;
+        }
+
+        .user-orders-meta {
+            font-family: var(--czp-font-sans);
+            color: rgba(255, 255, 255, 0.78) !important;
+        }
+
+        .user-order-card__total-label {
+            font-family: var(--czp-font-sans);
+            font-size: 0.85rem;
+            color: rgba(5, 12, 36, 0.6);
+        }
+
+        .user-order-table__th-num {
+            width: 3rem;
+        }
+
+        .user-order-table__th-qty {
+            width: 5rem;
+        }
+
+        .user-order-table__th-money {
+            width: 7rem;
+        }
+
+        .user-order-table__line-total {
+            color: #050c24;
+        }

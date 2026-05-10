@@ -11,7 +11,7 @@ class OrdersDetailController extends Controller
     public function displayDetails($id)
     {       
         return view('orderdetails', [
-            'orders' => OrderDetails::where('order_id', $id)->get()    
+            'orders' => OrderDetails::with('products')->where('order_id', $id)->get(),
         ]);
        
     }

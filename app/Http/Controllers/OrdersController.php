@@ -2,35 +2,29 @@
 
 namespace App\Http\Controllers;
 
-
-
-use App\Models\Cart;
-use App\Models\OrderDetails;
 use App\Models\Orders;
-use Illuminate\Http\Request;
-use App\Http\Requests;
-use Illuminate\Support\Facades\Redirect;
 
 class OrdersController extends Controller
 {
-    //
-
     public function userOrder()
     {
-        $orders = Orders::where('user_id', auth()->id())->latest()->get();
-        // dd($orders->load('payment'));
+        $orders = Orders::where('user_id', auth()->id())
+            ->with(['payment', 'orderdetails.products'])
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
         return view('userorder', [
-            'orders' => $orders
+            'orders' => $orders,
         ]);
     }
 
     public function displayOrders()
     {
-        $order = Orders::all();
+        $order = Orders::with(['payment', 'user'])->latest()->paginate(25);
+
         return view('allorders', [
-            'orders' => $order
+            'orders' => $order,
         ]);
     }
-
-   
 }

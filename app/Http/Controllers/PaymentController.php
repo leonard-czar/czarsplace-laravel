@@ -6,83 +6,144 @@ use App\Models\Cart;
 use App\Models\OrderDetails;
 use App\Models\Orders;
 use App\Models\Payment;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Unicodeveloper\Paystack\Facades\Paystack;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-#
+use Unicodeveloper\Paystack\Exceptions\PaymentVerificationFailedException;
+use Unicodeveloper\Paystack\Facades\Paystack;
+
 class PaymentController extends Controller
 {
-    //
-
-    public function redirectToGateway(Request $request)
+    public function redirectToGateway(Request $request): RedirectResponse
     {
+        $request->validate([
+            'address' => 'required|string',
+        ]);
+
+        $cartItems = Cart::where('user_id', auth()->id())->get();
+
+        if ($cartItems->isEmpty()) {
+            return Redirect::back()->with(['msg' => 'Your cart is empty.', 'type' => 'error']);
+        }
+
+        $mail = auth()->user()->email;
+
         try {
-            $request->validate([
-                'address' => 'required|string'
-            ]);
+            $order = DB::transaction(function () use ($request, $cartItems) {
+                $total = $cartItems->sum(fn ($row) => (float) $row->total);
 
-            $cartItem = Cart::where('user_id', auth()->id())->get();
-            if (!empty($cartItem)) {
+                $order = Orders::create([
+                    'user_id' => auth()->id(),
+                    'alt_telephone' => $request->input('altphone'),
+                    'shipping_address' => $request->input('address'),
+                    'total_amount' => (string) $total,
+                ]);
 
-                $order = new Orders();
-                $order->id = $randomnumber = random_int(10000000000, 99999999999);
-                $order->user_id = auth()->id();
-                $order->alt_telephone = $request->input('altphone');
-                $order->shipping_address = $request->input('address');
-                $order->total_amount = $total = Cart::where('user_id', auth()->id())->sum('total');
-                $mail = auth()->user()->email;
-                $order->save();
-
-                foreach ($cartItem as $item) {
-                    $orderdetails = new OrderDetails();
-                    $orderdetails->order_id = $randomnumber;
-                    $orderdetails->unit_price = $item->price;
-                    $orderdetails->qty = $item->qty;
-                    $orderdetails->product_id = $item->product_id;
-                    $orderdetails->total = $item->qty * $item->price;
-                    $orderdetails->save();
+                foreach ($cartItems as $item) {
+                    OrderDetails::create([
+                        'order_id' => $order->id,
+                        'unit_price' => $item->price,
+                        'qty' => $item->qty,
+                        'product_id' => $item->product_id,
+                        'total' => (string) ((float) $item->qty * (float) $item->price),
+                    ]);
                 }
 
-                $data = array(
-                    "amount" => $total * 100,
-                    "reference" => $randomnumber,
-                    "email" => $mail,
-                    "currency" => "NGN",
-                );
-                return Paystack::getAuthorizationUrl($data)->redirectNow();
-            }
-        } catch (\Exception $e) {
-            return Redirect::back()->with(['msg' => 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
+                return $order;
+            });
+
+            $total = (float) $order->total_amount;
+
+            $data = [
+                'amount' => (int) round($total * 100),
+                'reference' => (string) $order->id,
+                'email' => $mail,
+                'currency' => 'NGN',
+            ];
+
+            return Paystack::getAuthorizationUrl($data)->redirectNow();
+        } catch (\Throwable $e) {
+            report($e);
+
+            return Redirect::back()->with(['msg' => 'Unable to start payment. Please try again.', 'type' => 'error']);
         }
     }
 
     /**
-     * Obtain Paystack payment information
-     * @return void
+     * Paystack redirects here after payment. Must work without an authenticated session.
      */
-    public function handleGatewayCallback()
+    public function handleGatewayCallback(): RedirectResponse
     {
-
-        $paymentDetails = Paystack::getPaymentData(); //this comes with all the data needed to process the transaction
-        // Getting the value via an array method
-        $orderid = $paymentDetails['data']['reference']; // Getting InvoiceId I passed from the form
-        $status = $paymentDetails['data']['status']; // Getting the status of the transaction
-        $amount = $paymentDetails['data']['amount']; //Getting the Amount
-
-
-        if ($status == "success") { //Checking to Ensure the transaction was succesful
-            $paymentstatus = 'complete';
-            Payment::create(['order_id' => $orderid, 'payment_status' => $paymentstatus, 'amount' => $amount]); // Storing the payment in the database
-            Cart::where('user_id', auth()->id())->delete();
-            return redirect()->route('userorder');
-        } else {
-            $paymentstatus = 'pending';
-            Payment::create(['order_id' => $orderid, 'payment_status' => $paymentstatus, 'amount' => $amount]); // Storing the payment in the database         
-            return redirect()->route('showcart');
+        try {
+            $paymentDetails = Paystack::getPaymentData();
+        } catch (PaymentVerificationFailedException $e) {
+            return redirect()
+                ->route('login')
+                ->with('error', 'We could not verify this payment. If you were charged, contact support with your Paystack reference.');
         }
 
-        // Now you have the payment details,
-        // you can store the authorization_code in your DB to allow for recurrent subscriptions
-        // you can then redirect or do whatever you want
+        $payload = $paymentDetails['data'] ?? [];
+        $reference = $payload['reference'] ?? null;
+        $status = $payload['status'] ?? null;
+        $amountKobo = isset($payload['amount']) ? (int) $payload['amount'] : null;
+
+        if ($reference === null || $reference === '') {
+            return redirect()->route('login')->with('error', 'Invalid payment response.');
+        }
+
+        $orderId = (int) $reference;
+        $order = Orders::find($orderId);
+
+        if (! $order) {
+            return redirect()->route('login')->with('error', 'Order not found. Contact support if you completed a payment.');
+        }
+
+        $expectedKobo = (int) round((float) $order->total_amount * 100);
+        if ($amountKobo !== null && abs($amountKobo - $expectedKobo) > 1) {
+            report(new \RuntimeException("Paystack amount mismatch for order {$orderId}: expected {$expectedKobo}, got {$amountKobo}"));
+
+            return redirect()->route('login')->with('error', 'Payment verification failed (amount mismatch). Contact support.');
+        }
+
+        if ($status === 'success') {
+            Payment::updateOrCreate(
+                ['order_id' => $orderId],
+                [
+                    'payment_status' => 'complete',
+                    'amount' => (string) ($amountKobo ?? $expectedKobo),
+                ]
+            );
+
+            Cart::where('user_id', $order->user_id)->delete();
+
+            if (auth()->check() && (int) auth()->id() === (int) $order->user_id) {
+                return redirect()
+                    ->route('userorder')
+                    ->with('success', 'Payment completed successfully.');
+            }
+
+            return redirect()
+                ->route('login')
+                ->with('success', 'Payment completed. Log in to view your orders.');
+        }
+
+        Payment::updateOrCreate(
+            ['order_id' => $orderId],
+            [
+                'payment_status' => 'pending',
+                'amount' => (string) ($amountKobo ?? 0),
+            ]
+        );
+
+        if (auth()->check()) {
+            return redirect()
+                ->route('showcart')
+                ->with(['msg' => 'Payment was not completed.', 'type' => 'error']);
+        }
+
+        return redirect()
+            ->route('login')
+            ->with('error', 'Payment was not completed. You can try again from your cart after logging in.');
     }
 }

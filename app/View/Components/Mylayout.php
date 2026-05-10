@@ -23,6 +23,6 @@ class Mylayout extends Component
      */
     public function render()
     {
-        return view('layouts.mylayout');
+        return view('layouts.portal');
     }
 }
