@@ -13,26 +13,22 @@ return [
 
     /**
      * Public Key From Paystack Dashboard
-     *
      */
-    'publicKey' => getenv('PAYSTACK_PUBLIC_KEY'),
+    'publicKey' => env('PAYSTACK_PUBLIC_KEY'),
 
     /**
      * Secret Key From Paystack Dashboard
-     *
      */
-    'secretKey' => getenv('PAYSTACK_SECRET_KEY'),
+    'secretKey' => env('PAYSTACK_SECRET_KEY'),
 
     /**
-     * Paystack Payment URL
-     *
+     * Paystack API base URL (omit trailing slash)
      */
-    'paymentUrl' => getenv('PAYSTACK_PAYMENT_URL'),
+    'paymentUrl' => rtrim(env('PAYSTACK_PAYMENT_URL', 'https://api.paystack.co'), '/'),
 
     /**
      * Optional email address of the merchant
-     *
      */
-    'merchantEmail' => getenv('MERCHANT_EMAIL'),
+    'merchantEmail' => env('MERCHANT_EMAIL'),
 
 ];
