@@ -94,6 +94,9 @@ jobs:
           script: |
             set -e
             cd /home/lebechi/www/czarsplace.cybercraftsmen.tech/czarsplace-laravel
+            # Git must be able to unlink/replace files. If composer/artisan ran as root or www-data, checkout fails with:
+            # "unable to unlink old '...': Permission denied". -n avoids hanging on password prompts over SSH.
+            sudo -n chown -R "$(whoami):$(whoami)" .
             # Match GitHub main exactly. Plain checkout/pull fails if the VPS has local edits to tracked files.
             # -f -B recreates/resets local main to origin/main and overwrites the working tree; .env stays if gitignored.
             git fetch origin
