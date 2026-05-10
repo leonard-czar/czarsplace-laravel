@@ -15,6 +15,9 @@ use Unicodeveloper\Paystack\Facades\Paystack;
 
 class PaymentController extends Controller
 {
+    /** Paystack Nigeria minimum charge is typically ₦100 (amount is in kobo). */
+    private const MIN_AMOUNT_KOBO = 100 * 100;
+
     public function redirectToGateway(Request $request): RedirectResponse
     {
         $request->validate([
@@ -27,17 +30,37 @@ class PaymentController extends Controller
             return Redirect::back()->with(['msg' => 'Your cart is empty.', 'type' => 'error']);
         }
 
+        $publicKey = config('paystack.publicKey');
+        $secretKey = config('paystack.secretKey');
+        if (empty($publicKey) || empty($secretKey)) {
+            $msg = config('app.debug')
+                ? 'Paystack is not configured: set PAYSTACK_PUBLIC_KEY and PAYSTACK_SECRET_KEY in .env, then run php artisan config:clear (and config:cache on production).'
+                : 'Payment is temporarily unavailable. Please contact support.';
+
+            return Redirect::back()->with(['msg' => $msg, 'type' => 'error']);
+        }
+
         $mail = auth()->user()->email;
+        $cartTotal = $cartItems->sum(fn ($row) => (float) $row->total);
+        if ($cartTotal <= 0) {
+            return Redirect::back()->with(['msg' => 'Your cart total must be greater than zero.', 'type' => 'error']);
+        }
+
+        $amountKobo = (int) round($cartTotal * 100);
+        if ($amountKobo < self::MIN_AMOUNT_KOBO) {
+            return Redirect::back()->with([
+                'msg' => 'Order total must be at least ₦100 to pay with Paystack.',
+                'type' => 'error',
+            ]);
+        }
 
         try {
-            $order = DB::transaction(function () use ($request, $cartItems) {
-                $total = $cartItems->sum(fn ($row) => (float) $row->total);
-
+            $order = DB::transaction(function () use ($request, $cartItems, $cartTotal) {
                 $order = Orders::create([
                     'user_id' => auth()->id(),
                     'alt_telephone' => $request->input('altphone'),
                     'shipping_address' => $request->input('address'),
-                    'total_amount' => (string) $total,
+                    'total_amount' => (string) $cartTotal,
                 ]);
 
                 foreach ($cartItems as $item) {
@@ -53,20 +76,23 @@ class PaymentController extends Controller
                 return $order;
             });
 
-            $total = (float) $order->total_amount;
-
             $data = [
-                'amount' => (int) round($total * 100),
+                'amount' => $amountKobo,
                 'reference' => (string) $order->id,
                 'email' => $mail,
                 'currency' => 'NGN',
+                'callback_url' => route('payment'),
             ];
 
             return Paystack::getAuthorizationUrl($data)->redirectNow();
         } catch (\Throwable $e) {
             report($e);
 
-            return Redirect::back()->with(['msg' => 'Unable to start payment. Please try again.', 'type' => 'error']);
+            $msg = config('app.debug')
+                ? 'Payment start failed: '.$e->getMessage()
+                : 'Unable to start payment. Please try again.';
+
+            return Redirect::back()->with(['msg' => $msg, 'type' => 'error']);
         }
     }
 
