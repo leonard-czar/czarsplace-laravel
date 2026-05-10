@@ -1,15 +1,14 @@
 # CI: runs PHPUnit on every push / PR to main.
 #
 # CD: SSH deploy only on push to main (not on PRs). Repo secrets:
-#   HOST              — MUST be reachable on port 22 from the public internet.
-#                       Use your VPS public IP, or a hostname whose DNS is "DNS only"
-#                       (grey cloud) in Cloudflare. If HOST is the same domain you
-#                       put behind Cloudflare "Proxied" (orange cloud), SSH often
-#                       resolves to a Cloudflare IP and you get: dial tcp …:22 i/o timeout.
-#   SERVER_USERNAME   — SSH user
-#   SERVER_PRIVATE_KEY — PEM OpenSSH private key (full key including BEGIN/END lines)
-#
-# If SSH is not on port 22, add under `with:`:  port: 2222  (or your port).
+#   SERVER_HOST       — VPS host/IP (DNS-only / grey cloud in Cloudflare if that hostname is otherwise proxied).
+#   SERVER_PORT       — SSH port (e.g. 22).
+#   SERVER_USERNAME   — SSH user (must own the app dir, or use SERVER_SUDO_PASSWORD).
+#   SERVER_PRIVATE_KEY — PEM OpenSSH private key (full key including BEGIN/END lines).
+#   SERVER_SUDO_PASSWORD — optional: sudo password for SERVER_USERNAME so deploy can
+#                       `chown -R user:user` the app tree when root/www-data owns files
+#                       (fixes "unable to unlink ... Permission denied"). Prefer one-time
+#                       `chown` as root on the VPS or passwordless sudo for chown only.
 
 name: CI / CD
 
@@ -83,21 +82,26 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy over SSH
+        env:
+          SERVER_SUDO_PASSWORD: ${{ secrets.SERVER_SUDO_PASSWORD }}
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.SERVER_HOST }}
           port: ${{ secrets.SERVER_PORT }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
+          envs: SERVER_SUDO_PASSWORD
           timeout: 60s
           command_timeout: 20m
           script: |
             set -e
             cd /home/lebechi/www/czarsplace.cybercraftsmen.tech/czarsplace-laravel
-            # If git fails with "unable to unlink ... Permission denied", some files are owned by root/www-data
-            # (often from running composer/artisan as root). Fix once on the VPS as root, e.g.:
-            #   chown -R lebechi:lebechi /home/lebechi/www/czarsplace.cybercraftsmen.tech/czarsplace-laravel
-            # Then run deploy only as that SSH user (no sudo in this job — passwordless sudo is not assumed).
+            # Root/www-data-owned files block git checkout ("unable to unlink ..."). Optional: set repo secret
+            # SERVER_SUDO_PASSWORD to this user's sudo password so we can chown the tree before git. Otherwise
+            # fix once as root: chown -R lebechi:lebechi /home/lebechi/www/.../czarsplace-laravel
+            if [ -n "${SERVER_SUDO_PASSWORD:-}" ]; then
+              printf '%s\n' "$SERVER_SUDO_PASSWORD" | sudo -S -p '' chown -R "$(whoami):$(whoami)" .
+            fi
             # Match GitHub main exactly. Plain checkout/pull fails if the VPS has local edits to tracked files.
             # -f -B recreates/resets local main to origin/main and overwrites the working tree; .env stays if gitignored.
             git fetch origin
