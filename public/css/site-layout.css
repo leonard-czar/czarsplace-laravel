@@ -1,0 +1,360 @@
+﻿/* ---- Prevent horizontal page scroll ---- */
+        html {
+            overflow-x: hidden;
+        }
+
+        body.czp-site {
+            overflow-x: hidden;
+            max-width: 100%;
+            font-family: var(--czp-font-sans);
+        }
+
+        body.czp-site .row {
+            --bs-gutter-x: 1.25rem;
+        }
+
+        body.czp-site img,
+        body.czp-site video,
+        body.czp-site canvas,
+        body.czp-site .table-responsive,
+        body.czp-site .carousel,
+        body.czp-site .carousel-inner,
+        body.czp-site .carousel-item > img {
+            max-width: 100%;
+        }
+
+        /* ---- Site header (shared portal + public) ---- */
+        .czp-header-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .czp-header-top {
+            background: linear-gradient(90deg, #050C24 0%, #0a1740 50%, #050C24 100%);
+            border-bottom: 1px solid rgba(251, 208, 121, 0.18);
+        }
+
+        .czp-header-top .container-fluid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem 1rem;
+            padding-top: 0.65rem;
+            padding-bottom: 0.65rem;
+        }
+
+        .czp-header-brand {
+            font-family: var(--czp-font-sans);
+            font-weight: 700;
+            color: #fff !important;
+            text-decoration: none !important;
+            font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+            margin: 0;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+        }
+
+        .czp-header-brand:hover {
+            color: #fbd079 !important;
+        }
+
+        .czp-header-search {
+            flex: 1 1 220px;
+            max-width: min(420px, 100%);
+            min-width: 0;
+        }
+
+        .czp-header-search .form-control {
+            border-radius: 2rem 0 0 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding-left: 1rem;
+        }
+
+        .czp-header-search .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .czp-header-search .form-control:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(251, 208, 121, 0.45);
+            box-shadow: none;
+            color: #fff;
+        }
+
+        .czp-header-search .btn {
+            border-radius: 0 2rem 2rem 0;
+            border: 1px solid rgba(251, 208, 121, 0.5);
+            color: #050C24;
+            background: #fbd079;
+            font-family: var(--czp-font-sans);
+            font-size: 0.85rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .czp-header-search .btn:hover {
+            background: #e8c66a;
+            border-color: #fbd079;
+            color: #050C24;
+        }
+
+        .czp-nav-main {
+            background: #050C24 !important;
+            border-bottom: 2px solid rgba(251, 208, 121, 0.25);
+            padding-top: 0.15rem;
+            padding-bottom: 0.15rem;
+        }
+
+        .czp-nav-main .navbar-nav .nav-link.brandname {
+            padding: 0.55rem 0.65rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+            border-radius: 0.25rem;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+
+        .czp-nav-main .navbar-nav .nav-link.brandname:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .czp-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .czp-nav-cart {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff !important;
+            text-decoration: none !important;
+        }
+
+        .czp-nav-cart:hover {
+            background: rgba(251, 208, 121, 0.15);
+            border-color: rgba(251, 208, 121, 0.35);
+            color: #fbd079 !important;
+        }
+
+        .czp-nav-cart.cart-nav-active {
+            border-color: rgba(251, 208, 121, 0.55);
+            background: rgba(251, 208, 121, 0.18);
+        }
+
+        .czp-nav-cart.cart-nav-active .fa-cart-shopping {
+            color: #fff !important;
+        }
+
+        .czp-nav-main .nav-link.brandname {
+            color: rgba(255, 255, 255, 0.88) !important;
+        }
+
+        .czp-nav-main .nav-link.brandname:hover {
+            color: #fff !important;
+        }
+
+        .czp-nav-cart .badge {
+            position: absolute;
+            top: -0.2rem;
+            right: -0.2rem;
+            font-size: 0.65rem;
+            min-width: 1.1rem;
+        }
+
+        .czp-btn-signout {
+            font-family: var(--czp-font-sans);
+            font-size: 0.78rem !important;
+            border-radius: 2rem !important;
+            padding: 0.35rem 0.85rem !important;
+            border-color: rgba(220, 53, 69, 0.65) !important;
+            color: #ff8a90 !important;
+        }
+
+        .czp-btn-signout:hover {
+            background: rgba(220, 53, 69, 0.2) !important;
+            color: #fff !important;
+        }
+
+        .czp-nav-account {
+            border-radius: 2rem !important;
+            border: 1px solid rgba(251, 208, 121, 0.35) !important;
+            padding: 0.4rem 0.95rem !important;
+            margin-top: 0.15rem;
+        }
+
+        .czp-nav-account:not(.active) {
+            color: rgba(255, 255, 255, 0.55) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .czp-nav-account.active {
+            color: #fff !important;
+            border-color: rgba(251, 208, 121, 0.55) !important;
+            background: rgba(251, 208, 121, 0.1);
+        }
+
+        /* ---- Footer ---- */
+        .czp-footer {
+            background: linear-gradient(180deg, #030714 0%, #050C24 40%, #060d28 100%);
+            border-top: 3px solid rgba(251, 208, 121, 0.35);
+            margin-top: auto;
+        }
+
+        .czp-footer__heading {
+            font-family: var(--czp-font-sans);
+            font-size: 0.95rem;
+            color: #fbd079;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(251, 208, 121, 0.25);
+            letter-spacing: 0.04em;
+        }
+
+        .czp-footer__text {
+            font-family: var(--czp-font-sans);
+            font-size: 0.875rem;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.68);
+            margin-bottom: 0.85rem;
+        }
+
+        .czp-footer__socials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            justify-content: flex-start;
+        }
+
+        .czp-footer__social {
+            display: inline-flex;
+            padding: 0.35rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.06);
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+
+        .czp-footer__social:hover {
+            transform: translateY(-2px);
+            background: rgba(251, 208, 121, 0.12);
+        }
+
+        .czp-footer__contact {
+            font-family: var(--czp-font-sans);
+            font-size: 0.9rem;
+        }
+
+        .czp-footer__contact a {
+            color: rgba(255, 255, 255, 0.75) !important;
+            text-decoration: none !important;
+        }
+
+        .czp-footer__contact a:hover {
+            color: #fbd079 !important;
+        }
+
+        .czp-footer__bar {
+            background: rgba(0, 0, 0, 0.28);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .czp-footer__copy {
+            font-family: var(--czp-font-sans);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        /* Floating WhatsApp */
+        .czp-float-wa {
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 1040;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 0.85rem 0.55rem 0.65rem;
+            border-radius: 2rem;
+            background: linear-gradient(135deg, #128c7e, #25d366);
+            color: #fff !important;
+            text-decoration: none !important;
+            font-family: var(--czp-font-sans);
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 6px 20px rgba(18, 140, 126, 0.45);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .czp-float-wa:hover {
+            color: #fff !important;
+            transform: scale(1.03);
+            box-shadow: 0 8px 28px rgba(18, 140, 126, 0.55);
+        }
+
+        .czp-float-wa img {
+            border-radius: 50%;
+        }
+
+        @media (max-width: 576px) {
+            .czp-float-wa__label {
+                display: none;
+            }
+
+            .czp-float-wa {
+                padding: 0.65rem;
+            }
+        }
+
+        #copyright_txt {
+            font-family: var(--czp-font-sans);
+            color: white;
+        }
+
+        /* Admin shell (aligned with storefront chrome) */
+        body.admin-app.czp-site {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        .czp-admin-footer-bar {
+            background: rgba(0, 0, 0, 0.35);
+            border-top: 1px solid rgba(251, 208, 121, 0.22);
+            flex-shrink: 0;
+            margin-top: auto;
+        }
+
+        .czp-admin-header-note {
+            font-family: var(--czp-font-sans);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #fbd079;
+            opacity: 0.95;
+        }
+
+        /* Carousel / banner text: avoid horizontal overflow */
+        body.czp-site .carousel-caption {
+            max-width: min(92vw, 42rem);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        body.czp-site .bannertxt {
+            max-width: 100%;
+            word-wrap: break-word;
+            font-size: clamp(0.95rem, 4vw, 1.75rem) !important;
+        }

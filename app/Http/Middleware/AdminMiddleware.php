@@ -26,9 +26,8 @@ class AdminMiddleware
             return redirect('/dashboard')->with('deny','Access denied as you are not an Admin');
            }
 
-        }else {
-            return redirect('/login');
-
+        } else {
+            return redirect()->route('admin.login');
         }
         
     }

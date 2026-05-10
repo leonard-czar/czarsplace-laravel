@@ -1,65 +1,72 @@
-@extends('layouts.app')
+@extends('layouts.portal')
+
+@section('title', 'New password |')
+
+@push('styles')
+    @include('partials.auth-page-styles')
+@endpush
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+    <div class="czp-auth-wrap">
+        <div class="container py-4 py-lg-5">
+            <div class="row justify-content-center align-items-start g-4 g-lg-5">
+                <div class="col-lg-5 d-none d-lg-block">
+                    <div class="czp-auth-aside">
+                        <p class="czp-auth-aside__eyebrow">{{ config('app.name', "Czar's Place") }}</p>
+                        <h2 class="czp-auth-aside__title">Choose a strong new password.</h2>
+                        <p class="czp-auth-aside__text">Use a unique passphrase you don’t reuse elsewhere. After saving, sign in with your new password on any device.</p>
+                        <div class="czp-auth-aside__icons" aria-hidden="true">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <i class="fa-solid fa-fingerprint"></i>
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-7 col-xl-6">
+                    <div class="czp-auth-card czp-auth-card--wide">
+                        <div class="czp-auth-card__head">
+                            <div class="czp-auth-card__icon" aria-hidden="true">
+                                <i class="fa-solid fa-arrow-rotate-right"></i>
                             </div>
+                            <h1>Set a new password</h1>
+                            <p class="czp-auth-card__sub">Your email is confirmed from the link. Enter and confirm your new password below.</p>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                        <form method="POST" action="{{ route('password.update') }}" novalidate>
+                            @csrf
+                            <input type="hidden" name="token" value="{{ $token }}">
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                            <label class="czp-auth-label" for="email">{{ __('Email') }}</label>
+                            <input type="email" name="email" id="email"
+                                class="form-control mb-3 @error('email') is-invalid @enderror"
+                                value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus
+                                placeholder="you@example.com">
+                            @error('email')
+                                <span class="invalid-feedback d-block mb-2" role="alert">{{ $message }}</span>
+                            @enderror
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <label class="czp-auth-label" for="password">{{ __('Password') }}</label>
+                            <input type="password" name="password" id="password"
+                                class="form-control mb-3 @error('password') is-invalid @enderror" required
+                                autocomplete="new-password" placeholder="At least 8 characters">
+                            @error('password')
+                                <span class="invalid-feedback d-block mb-2" role="alert">{{ $message }}</span>
+                            @enderror
+
+                            <label class="czp-auth-label" for="password-confirm">{{ __('Confirm password') }}</label>
+                            <input type="password" name="password_confirmation" id="password-confirm"
+                                class="form-control mb-4" required autocomplete="new-password"
+                                placeholder="Repeat password">
+
+                            <button type="submit" class="czp-auth-submit">{{ __('Save new password') }}</button>
+
+                            <div class="czp-auth-links">
+                                <a href="{{ route('login') }}">{{ __('Back to sign in') }}</a>
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

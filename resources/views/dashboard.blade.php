@@ -1,83 +1,70 @@
 @extends('layouts.portal')
 
-@section('title',' Dashboard |')
+@section('title', 'Home |')
 
 @section('content')
+    @include('partials.portal-shop-ui')
 
+    <div class="czp-page">
+        <div class="czp-dash-carousel">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{ asset('images/banner1.jpg') }}" class="d-block w-100 opacity-75" alt="Banner: luxury wristwatches collection">
+                        <div class="carousel-caption position-absolute top-50 start-50 translate-middle w-100 px-2">
+                            <div class="czp-dash-banner-cap czp-dash-banner-cap--dark mx-auto">
+                                <span class="bannertxt d-block text-white">Your haven for luxury wristwatches.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ asset('images/ban.jpg') }}" class="d-block w-100 opacity-75" alt="Banner: quality timepieces">
+                        <div class="carousel-caption position-absolute top-50 start-50 translate-middle w-100 px-2">
+                            <div class="czp-dash-banner-cap czp-dash-banner-cap--gold mx-auto">
+                                <span class="bannertxt d-block">Quality with class, crafted for you.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="row " style="justify-content:center;background-color: rgba(5, 12, 36, 0.7);z-index:-1">
-  <div class="col-12">
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div>
-            <img src="images/banner1.jpg" class="d-block w-100 opacity-50 img-fluid img-responsive" alt="...">
-          </div>
-          <div class="position-absolute top-50 start-50 translate-middle mb-5 "
-            style="background-color:rgb(47,49,59,1);text-align:inherit;width:max-content;box-shadow:7px 5px 17px 10px black;">
-            <span class="bannertxt">Your Haven For Luxury Wristwatches.</span>
-            <br>
-          </div>
+        <div class="container-fluid px-3 px-md-4">
+            <div class="czp-section-head">
+                <h2>Our collections</h2>
+                <div class="czp-section-head__rule"></div>
+                <p class="text-muted small mt-2 mb-0 czp-section-head__sub">Browse by brand — tap a watch to see full details.</p>
+            </div>
+
+            @if ($brands->count() > 0)
+                @foreach ($brands as $brand)
+                    <div class="mb-2 mt-4 d-flex align-items-center gap-2 flex-wrap">
+                        <div class="rounded p-2 bg-white border shadow-sm czp-dash-brand-logo-box">
+                            <img src="{{ $brand->image_url }}" alt="{{ $brand->brandname }}" class="img-fluid">
+                        </div>
+                        <h3 class="mb-0 czp-dash-brand-title">{{ $brand->brandname }}</h3>
+                    </div>
+                    <hr class="my-3 opacity-25">
+
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3 g-md-4 mb-5">
+                        @foreach ($brand->products as $product)
+                            <div class="col">
+                                <a href="{{ route('watchspec', $product->id) }}" class="czp-product-card text-decoration-none">
+                                    <div class="czp-product-card__img-wrap">
+                                        <img src="{{ $product->image_url }}" alt="{{ $product->watch_name }}" class="czp-product-card__img">
+                                    </div>
+                                    <div class="czp-product-card__body">
+                                        <h3 class="czp-product-card__name">{{ $product->watch_name }}</h3>
+                                        <p class="czp-product-card__desc">{{ Str::limit($product->watch_description, 90) }}</p>
+                                        <p class="czp-product-card__price mb-0">₦{{ number_format((float) $product->watch_price, 2) }}</p>
+                                        <span class="czp-product-card__cta">View details</span>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                @endforeach
+            @endif
         </div>
-        <div class="carousel-item">
-          <div class=" "><img src="images/ban.jpg" class="d-block w-100 opacity-50 img-fluid img-responsive" alt="...">
-          </div>
-          <div class="position-absolute top-50 start-50 translate-middle mb-5"
-            style="background-color:rgb(251,208,121,1);width:max-content;border-radius:2%;box-shadow:7px 5px 17px 1px rgb(251,208,121,1);">
-            <span class="bannertxt" style="color:rgb(0,0,0,0.9) ;">Quality with class crafted just for you.</span>
-            <br>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
-
-<div class="mt-5 mb-5 text-center">
-  <h3>OUR COLLECTIONS</h3>
-  <hr>
-</div>
-<div class="container-fluid-sm m-3">
-
-  @if ($brands->count() > 0)
-  @foreach ($brands as $brand)
-  <div class="row">
-    <div class="col mb-5 mt-1 text-center">
-      <div style="margin-left:50px;position:relative; ">
-        <img src="{{$brand->brandimg}}" alt="" width="110" class="img-fluid img-responsive">
-
-      </div>
-      <hr>
-    </div>
-
-  </div>
-
-
-  <div class="row">
-    @foreach ($brand->products as $product)
-
-    <div class="col-sm-1 col-lg col-md-3 col-xl mb-5 ">
-      <form action="/watchspec/{{$product->id}}" method='GET' style="text-align: center;">
-        <div class=" " style="width: 100%;height:auto"><img src="{{$product->watch_image}}" alt=""
-            class="img-responsive-sm img-fluid">
-        </div>
-
-        <div style="text-align: center;color:rgba(0, 5, 0,0.6);" class="mb-2">
-          <b>{{$product->watch_description}}</b>
-        </div>
-        <input type="submit" value="{{$product->watch_name}}" class="btn btn col-10"
-          style="background-color: #050C24;color:burlywood;" name="btnsubmit">
-        <br>
-
-      </form>
-    </div>
-
-    @endforeach
-
-  </div>
-
-  @endforeach
-  @endif
-</div>
-
 @endsection

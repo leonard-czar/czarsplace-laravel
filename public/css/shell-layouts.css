@@ -1,0 +1,46 @@
+/* Auth minimal layout (login / register on dark gradient shell) */
+body.czp-admin-auth-body {
+    min-height: 100vh;
+    margin: 0;
+    background:
+        radial-gradient(ellipse 100% 80% at 100% 0%, rgba(251, 208, 121, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 70% at 0% 100%, rgba(34, 116, 165, 0.1) 0%, transparent 50%),
+        linear-gradient(165deg, #020514 0%, #050c24 40%, #0a1738 100%);
+}
+
+/* Admin console shell (navbar + full-height column layout) */
+.brandname {
+    font-family: var(--czp-font-sans);
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+}
+
+#brandname {
+    font-family: var(--czp-font-sans);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-nav .nav-link.brandname.active,
+.navbar-nav .nav-link.brandname.active:hover {
+    color: #fbd079 !important;
+    font-weight: 700;
+}
+
+body.admin-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+body.admin-app .admin-app-main {
+    flex: 1 0 auto;
+}
+
+.czp-admin-header-user {
+    font-family: var(--czp-font-sans);
+}

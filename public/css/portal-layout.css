@@ -1,0 +1,101 @@
+/* Storefront portal layout helpers (extracted from Blade) */
+.brandname {
+    font-family: var(--czp-font-sans);
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+}
+
+#brandname {
+    font-family: var(--czp-font-sans);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: white;
+}
+
+.bannertxt {
+    font-family: var(--czp-font-sans);
+    font-weight: 600;
+    color: white;
+    font-size: 4.5vw;
+    border-radius: 55%;
+}
+
+#copyright_txt {
+    font-family: var(--czp-font-sans);
+    color: white;
+}
+
+.row1 {
+    font-size: 1.1vw;
+    text-transform: capitalize;
+}
+
+.footr {
+    font-family: var(--czp-font-sans);
+    font-weight: 600;
+    color: white;
+}
+
+.price {
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 2px;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-item :hover {
+    color: white !important;
+}
+
+#drop :hover {
+    color: white !important;
+}
+
+.navbar-brand:hover {
+    color: white !important;
+}
+
+#acct:hover {
+    color: white !important;
+}
+
+#whatsapp {
+    position: fixed;
+    justify-content: flex-end;
+    display: flex;
+    top: 350px;
+    right: 20px;
+}
+
+#spanwhatsapp {
+    border: 2px solid white;
+    color: rgba(0, 0, 0, 0.9);
+    background-color: white;
+    border-radius: 7%;
+    padding: 3px;
+}
+
+.socials {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 30%;
+}
+
+.navbar-nav .nav-link.brandname.active,
+.navbar-nav .nav-link.brandname.active:hover {
+    color: #fbd079 !important;
+    font-weight: 700;
+}
+
+a.cart-nav-active .fa-cart-shopping {
+    color: #fff !important;
+}
+
+#navbarScroll .navbar-nav-scroll {
+    --bs-scroll-height: 100px;
+}

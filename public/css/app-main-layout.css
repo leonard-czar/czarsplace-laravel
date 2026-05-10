@@ -1,0 +1,9 @@
+:root {
+    --czp-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body.czp-site,
+body.admin-app,
+body.czp-admin-auth-body {
+    font-family: var(--czp-font-sans);
+}

@@ -2,13 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8 ">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit-to">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="leonard lebechi">
-    <meta name="description" content="your one stop shop for wristwatches">
-    <meta name="keywords" content="czar's Place,wristwatch,luxury watch,mechanical watch,
-    time,timepiece,online store,watch store,watch collection,
-    lagos,rolex,hublot,patek phillepe,">
+    <meta name="description" content="Czar's Place — luxury wristwatches in Lagos. Shop curated brands, explore men's and women's collections, and checkout securely.">
+    <meta name="keywords" content="Czar's Place, wristwatch, luxury watch, mechanical watch, men's watches, women's watches, timepiece, online watch store, Lagos, Rolex, Hublot, Audemars Piguet, Patek Philippe">
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('favicon_io/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicon_io/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon_io/favicon-16x16.png')}}">
@@ -16,300 +14,116 @@
 
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
+    @include('partials.app-main-layout')
     <title> @yield('title') {{config('app.name',"Czar's Place")}} Haven for luxury wristwatches</title>
 
-    <style>
-        @font-face {
-            font-family: 'czars';
-            src: url('Unica_One/UnicaOne-Regular.ttf');
-        }
+    <link rel="stylesheet" href="{{ asset('css/portal-layout.css') }}">
 
-        @font-face {
-            font-family: 'czars3';
-            src: url('Pacifico/Pacifico-Regular.ttf');
-        }
-
-        @font-face {
-            font-family: 'czars2';
-            src: url('Padauk/Padauk-Regular.ttf');
-        }
-
-
-
-        .brandname {
-            font-family: czars, sans-serif;
-            text-decoration: none;
-            color: white;
-        }
-
-        #brandname {
-            font-family: czars, sans-serif;
-            text-decoration: none;
-            color: white;
-        }
-
-        .bannertxt {
-            font-family: czars3, sans-serif;
-            /* color: rgba(0, 0, 0, 0.8); */
-            color: white;
-            font-size: 4.5vw;
-            border-radius: 55%;
-        }
-
-        #copyright_txt {
-            font-family: czars, sans-serif;
-            color: white;
-        }
-
-        .row1 {
-            font-size: 1.1vw;
-            text-transform: capitalize;
-        }
-
-        .footr {
-            font-family: czars, sans-serif;
-            color: white;
-        }
-
-        .price {
-            color: rgba(0, 0, 0, 0.6);
-            margin-top: 2px;
-        }
-
-        a,
-        a:hover {
-            text-decoration: none;
-            color: black;
-        }
-
-        .nav-item :hover {
-            color: white !important;
-        }
-
-        #drop :hover {
-            color: white !important;
-        }
-
-        .navbar-brand:hover {
-            color: white !important;
-        }
-
-        #acct:hover {
-            color: white !important;
-        }
-
-        #whatsapp {
-            position: fixed;
-            justify-content: flex-end;
-            display: flex;
-            top: 350px;
-            right: 20px;
-        }
-
-        #spanwhatsapp {
-            border: 2px solid white;
-            color: rgba(0, 0, 0, 0.9);
-            background-color: white;
-            border-radius: 7%;
-            padding: 3px;
-        }
-
-        .socials {
-            background-color: rgba(255, 255, 255, 0.5);
-            border-radius: 30%;
-        }
-    </style>
+    @include('partials.site-layout-styles')
+    <link rel="stylesheet" href="{{ asset('css/app-ui-polish.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/legacy-views.css') }}">
+    @stack('styles')
 
 </head>
 
-<body>
+<body class="czp-site d-flex flex-column min-vh-100">
 
+    @php
+    $portalCartActive = request()->routeIs('showcart', 'cartedit', 'checkout');
 
+    $czpHomeUrl = route('home');
+    $czpHomeActive = request()->routeIs('home', 'dashboard');
+    $czpBrandsUrl = route('displaybrands');
+    $czpBrandsActive = request()->routeIs('displaybrands');
+    $czpMaleUrl = route('malewatch');
+    $czpMaleActive = request()->routeIs('malewatch');
+    $czpFemaleUrl = route('femalewatch');
+    $czpFemaleActive = request()->routeIs('femalewatch');
+    $czpSearchAction = route('redirect');
+    @endphp
 
-
-
-    <!-------------NAVBAR----------->
-    <div class="container-fluid-sm ">
-
-        <nav class="navbar navbar-light bg-light" style="background-color: #050C24!important;">
-            <div class="container-fluid">
-                <a class="navbar-brand " href="{{ route('dashboard')}}" id="brandname">
-                    <h3>{{config('app.name',"Czar's
-                        Place")}}</h3>
-                </a>
-                <form class="d-flex" method="post" action="/redirect">
+    <header class="czp-header-wrap">
+        <div class="czp-header-top">
+            <div class="container-fluid px-3 px-lg-4">
+                <a class="czp-header-brand" href="{{ $czpHomeUrl }}" id="brandname">{{ config('app.name', "Czar's
+                    Place") }}</a>
+                <form class="czp-header-search d-flex" method="post" action="{{ $czpSearchAction }}">
                     @csrf
-                    <input class="form-control me-2" type="search" name="searchbox" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit" name="btnsearch">Search</button>
+                    <input class="form-control" type="search" name="searchbox" placeholder="Search watches…"
+                        aria-label="Search" required minlength="1" autocomplete="off">
+                    <button class="btn" type="submit" name="btnsearch">Search</button>
                 </form>
             </div>
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #050C24!important;">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark czp-nav-main">
+            <div class="container-fluid px-3 px-lg-4">
+                <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-1 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 flex-wrap navbar-nav-scroll">
                         <li class="nav-item">
-                            <a class="nav-link brandname" aria-current="page" href="{{ route('dashboard')}}">HOME</a>
+                            <a class="nav-link brandname {{ $czpHomeActive ? 'active' : '' }}" @if($czpHomeActive)
+                                aria-current="page" @endif href="{{ $czpHomeUrl }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link brandname" href="{{ url('/displaybrands')}}">BRANDS</a>
+                            <a class="nav-link brandname {{ $czpBrandsActive ? 'active' : '' }}"
+                                href="{{ $czpBrandsUrl }}">Brands</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link brandname" href="{{url('/malewatches')}}">MEN COLLECTION</a>
+                            <a class="nav-link brandname {{ $czpMaleActive ? 'active' : '' }}"
+                                href="{{ $czpMaleUrl }}">Men’s collection</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link brandname" href="{{url('/femalewatches')}}">LADIES COLLECTION</a>
+                            <a class="nav-link brandname {{ $czpFemaleActive ? 'active' : '' }}"
+                                href="{{ $czpFemaleUrl }}">Ladies’ collection</a>
                         </li>
+                        @auth
                         <li class="nav-item">
-                            <a class="nav-link brandname" href="/userorder">MY ORDERS</a>
+                            <a class="nav-link brandname {{ request()->routeIs('userorder') ? 'active' : '' }}"
+                                href="{{ url('/userorder') }}">My orders</a>
                         </li>
+                        @endauth
                     </ul>
-                    <a style="color:rgba(255, 255, 255,0.5);" class="d-flex m-mb-5 m-lg-2">
-                        <a type="sumbit" class="btn" href="/showcart" name="cart">
-                            <i class="fa-solid fa-cart-shopping text-light "></i>
-                            <span class="badge bg-success" style="font-size: 50%">
-                                @if (auth()->check())
-                                {{$carts->count()}}
-                                @endif
-                            </span>
+                    <div class="czp-nav-actions ms-lg-3 mt-2 mt-lg-0">
+                        @auth
+                        <a class="czp-nav-cart {{ $portalCartActive ? 'cart-nav-active' : '' }}"
+                            href="{{ route('showcart') }}" aria-label="Shopping cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            @if ($carts->count() > 0)
+                            <span class="badge rounded-pill bg-success">{{ $carts->count() }}</span>
+                            @endif
                         </a>
-                        <br>
-                    </a>
-                    <a href="{{ route('logout') }}" style="color:white;" id="logout"
-                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                        class="btn btn-outline-danger btn-sm"><b>Singout</b>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                        <a href="{{ route('logout') }}" id="logout"
+                            onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                            class="btn btn-outline-danger btn-sm czp-btn-signout">Sign out</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        @else
+                        <a class="nav-link brandname czp-nav-account {{ request()->routeIs('login', 'register') || request()->is('password*') ? 'active' : '' }} d-inline-flex align-items-center"
+                            href="{{ route('login') }}">Account</a>
+                        @endauth
+                    </div>
                 </div>
             </div>
         </nav>
+    </header>
 
-        <div>
-            @include('flash-message')
-            @yield('content')
-        </div>
+    <main class="flex-grow-1">
+        @include('flash-message')
+        @yield('content')
+    </main>
 
-        <footer style="justify-content:space-between;background-color: #050C24;">
-            <div class="container-fluid-sm">
-                <div class="row" style="border-bottom: 1px solid ; ">
+    @include('partials.site-footer')
 
-                    <div class="col-sm-4 mt-sm-4 " style="text-align:center ;
-color:rgba(255, 255, 255,0.5);font-size: 10px!important;" id="aboutus">
-                        <div class="footr">
-                            <h3>About Us</h3>
-                        </div>
-                        <div style="padding:10px;">
-                            <b>Luxury</b> is what sets apart ambitious people from others.
-                            <b>Style </b>is what sets apart sophisticated people from others.
-                            <b>Quality</b> is what sets wise people apart from others.
-                            At <b>Czar's Place</b>, our vision is to provide our clients with premium watchesthat have
-                            luxury, style, and quality.
-                            Our products will help you create your own style statement that is bold and classy. <br>
-                            <span><b><i>Why choose us?</i> </b> </span> <br>
-                            One word: <b>honesty</b>. Our unmatched honesty regarding our products is something our
-                            clients will find rare in the industry.
-                            Our recommendations will be tailored to your needs, and we will help you embody your very
-                            own style statement.
+    @include('partials.czp-confirm-modal')
 
-                            <h6> Our Core Values</h6>
-                            <span><b>Customers Come First,</b> We do not want to sell you mere objects.
-                                We want to adorn you with the best luxury watches and jewelry money could possibly
-                                buy.</span>
-                            <span><b> Authentic To The Core</b></span> <br>
-                            You can throw your fears of being tricked into buying something fake. Integrity, honesty,
-                            and authenticity lie in our foundations and sets us apart from others.
-
-                            <span><b>Variety of Style</b> </span> <br>
-                            <span>We are constantly searching,
-                                looking and talking for new pieces to add to our collection.
-                                We understand the importance of diversity in style and we make sure that you find
-                                everything you are looking for here at<b> Czars</b>.
-                                Our collections include all the important and famous name brands,
-                                and when you're choosing to do business with us, you don't need to worry about running
-                                out of style.</span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-sm-3  mt-sm-4" style="text-align:center ;">
-                        <h3 class="footr"> DISCLAIMER</h3>
-                        <p style="color:rgba(255, 255, 255,0.5);
-               font-size: 13px!important;"> We are not an official dealer for the products we sell and have no
-                            affiliation with the manufacturer.
-                            All brand names and trademarks are the property
-                            of their respective owners and are used for identification purposes only.</p>
-                    </div>
-                    <!--SOCIALS-->
-
-                    <div class="col-sm-3  mt-4" style=" text-align:center;">
-                        <h3 class="footr">FOLLOW US</h3>
-                        <a href="http://facebook.com" target="_blank" style="text-decoration: none; "> <img
-                                src="{{asset('images/fb1.png')}}" alt="facebook page" width="40" class="socials"></a>
-
-                        <a href="http://twitter.com/leonard_czar" target="_blank" style="text-decoration: none;"><img
-                                src="{{asset('images/twitter2.png')}}" alt="twitter page" width="40" class="socials">
-                        </a>
-
-                        <a href="http://instagram.com/leonard_czar" target="_blank" style="text-decoration: none;">
-                            <img src="{{asset('images/ig1.png')}}" alt="instagram page" width="40" class="socials">
-                        </a>
-                        <!--WHATSAPP-->
-
-                        <a id="whatsapp" href="https://wa.me/08182281634" target="_blank"
-                            style="text-decoration: none;">
-                            <div class="mt-2 me-2 opacity-50 "><span id="spanwhatsapp">
-                                    <b>chat with us</b> </span></div>
-                            <img src="{{asset('images/wats2.png')}}" alt="whatsapp" width="40"
-                                style=" border-radius: 20%;">
-                        </a>
-                    </div>
-
-                    <div class="col-sm-2  mt-4" style="text-align:center; padding-left:7px;padding-right:7px"
-                        id="contactus">
-                        <div>
-                            <h3 class="footr"> CONTACT US</h3>
-                            <div
-                                style="color:rgba(255, 255, 255,0.5);font-size: 13px;font-family:czars;padding-bottom:5px">
-                                <i class="fa-solid fa-phone text-light">
-                                </i> 08182281634
-                            </div>
-                            <div>
-                                <a href="#"
-                                    style="text-decoration: none;color:rgba(255, 255, 255,0.5);font-size: 13px;">
-                                    <i class="fa-solid fa-message text-light"></i> message </a>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
-            <!--COPYRIGHT-->
-            <div class="row">
-                <p class="col mt-1" style="text-align:center; color:rgba(255, 255, 255,0.5);font-family:czars;
-            justify-content:center;" id="copyright_txt">&copy; {{date("Y")}} {{config('app.name',"Czar's Place")}} </p>
-            </div>
-    </div>
-    </footer>
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-    <script type="text/javascript" language="javascript">
-        function validateDelete(e) {
-            var response = confirm('Are you sure you want to clear all items in cart?');
-            if (response == true) {
-                return true;
-            } else {
-                e.preventDefault();
-                return false;
-            }
-        }
-    </script>
+    <script src="{{ asset('js/czp-confirm-modal.js') }}"></script>
+
+</body>
+
+</html>

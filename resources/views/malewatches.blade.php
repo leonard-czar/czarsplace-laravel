@@ -1,39 +1,41 @@
 @extends('layouts.portal')
 
+@section('title', "Men's collection |")
+
 @section('content')
-<div class="mt-5 mb-5 text-center">
-  <h3>MALE COLLECTIONS</h3>
-</div>
+    @include('partials.portal-shop-ui')
 
-<div class="container-fluid-sm">
-  <div class='row '>
+    <div class="container-fluid czp-page px-3 px-md-4 py-3">
+        <header class="czp-hero">
+            <h1 class="czp-hero__title">Men’s collection</h1>
+            <p class="czp-hero__lead">Timepieces selected for bold, refined style — open any piece for specs and to add to cart.</p>
+        </header>
 
-    @if ($male->count() > 0)
-    @foreach ($male as $product)
+        @if ($male->count() > 0)
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4">
+                @foreach ($male as $product)
+                    <div class="col">
+                        <a href="{{ route('watchspec', $product->id) }}" class="czp-product-card text-decoration-none">
+                            <div class="czp-product-card__img-wrap">
+                                <img src="{{ $product->image_url }}" alt="{{ $product->watch_name }}" class="czp-product-card__img">
+                            </div>
+                            <div class="czp-product-card__body">
+                                <h3 class="czp-product-card__name">{{ $product->watch_name }}</h3>
+                                <p class="czp-product-card__desc">{{ Str::limit($product->watch_description, 90) }}</p>
+                                <p class="czp-product-card__price mb-0">₦{{ number_format((float) $product->watch_price, 2) }}</p>
+                                <span class="czp-product-card__cta">View details</span>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+            <div class="czp-pagination-wrap">{{ $male->links('vendor.pagination.centered-bootstrap-5') }}</div>
+        @else
+            <p class="text-center text-muted czp-muted-sans">No men’s watches in this view yet.</p>
+        @endif
 
-    <div class="col-sm col-lg-3 col-md-3 col-xxl-3 p-3">
-      <img src="{{$product->watch_image}}" alt="" class="img-fluid">
-      <div style="text-align: center;color:rgba(0, 0, 0,0.6);"><b>{{$product->watch_description}}</b></div>
-      <p class="price">
-      <form action="/watchspec/{{$product->id}}" method="GET" style="text-align: center;">
-        @csrf
-        <input type="submit" value="{{$product->watch_name}}" class="btn btn-sm col-10 "
-          style="background-color: #050C24;color:burlywood;" name="btnsubmit">
-      </form>
-      </p>
+        <p class="czp-back-link">
+            <a href="{{ route('home') }}">← Back to home</a>
+        </p>
     </div>
-
-    @endforeach
-    @endif
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm text-center mb-sm-3 mt-sm-3">
-    <div style="text-decoration:underline ;"><a href="index.php" class="text-primary">
-        << Back</a>
-    </div>
-  </div>
-</div>
 @endsection

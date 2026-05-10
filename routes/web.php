@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,6 @@ use App\Http\Controllers\ProductController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 #Admin middleware begins
 
@@ -55,29 +52,46 @@ Route::middleware('admin')->group(function () {
 });
 #Admin middleware ends
 
+Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->name('payment');
+
+/*
+|--------------------------------------------------------------------------
+| Storefront (same pages for guests and signed-in customers)
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/', [ProductController::class, 'index'])->name('home');
+
+Route::get('/watchspec/{id}', [ProductController::class, 'get_Product'])->name('watchspec');
+
+Route::get('/rolex', [ProductController::class, 'displayBrandCollection'])
+    ->defaults('catalogSlug', 'rolex')
+    ->name('rolex');
+
+Route::get('/hublot', [ProductController::class, 'displayBrandCollection'])
+    ->defaults('catalogSlug', 'hublot')
+    ->name('hublot');
+
+Route::get('/audemars', [ProductController::class, 'displayBrandCollection'])
+    ->defaults('catalogSlug', 'audemars')
+    ->name('audemars');
+
+Route::get('/femalewatches', [ProductController::class, 'displayFemaleWatch'])->name('femalewatch');
+
+Route::get('/malewatches', [ProductController::class, 'displayMaleWatch'])->name('malewatch');
+
+Route::get('/displaybrands', [BrandController::class, 'showBrands'])->name('displaybrands');
+Route::get('/search', [ProductController::class, 'searchResults'])->name('search.results');
+
+Route::post('/redirect', [ProductController::class, 'redirect'])->name('redirect');
+
 #auth middleware begins
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/watchspec/{id}', [App\Http\Controllers\ProductController::class, 'get_Product'])->name('watchspec');
-
-    Route::get('/dashboard', [App\Http\Controllers\ProductController::class, 'displayProducts'])->name('dashboard');
+    Route::get('/dashboard', [ProductController::class, 'displayProducts'])->name('dashboard');
 
     Route::post('/cart', [App\Http\Controllers\CartController::class, 'insertCart'])->name('cart');
-
-    Route::get('/rolex', [App\Http\Controllers\ProductController::class, 'displayRolex'])->name('rolex');
-
-    Route::get('/hublot', [App\Http\Controllers\ProductController::class, 'displayHublot'])->name('hublot');
-
-    Route::get('/audemars', [App\Http\Controllers\ProductController::class, 'displayAudemars'])->name('audemars');
-
-    Route::get('/femalewatches', [App\Http\Controllers\ProductController::class, 'displayFemaleWatch'])->name('femalewatch');
-
-    Route::get('/malewatches', [App\Http\Controllers\ProductController::class, 'displayMaleWatch'])->name('malewatch');
-
-    Route::get('/displaybrands', [App\Http\Controllers\BrandController::class, 'showBrands'])->name('displaybrands');
-
-    Route::post('/redirect', [App\Http\Controllers\ProductController::class, 'redirect'])->name('redirect');
 
     Route::delete('/clearcart', [App\Http\Controllers\CartController::class, 'deleteCart'])->name('clearcart');
 
@@ -89,13 +103,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/showcart', [App\Http\Controllers\CartController::class, 'showUserCart'])->name('showcart');
 
-    Route::get('/checkout', function () {
-        return view('checkout');
-    });
+    Route::view('/checkout', 'checkout')->name('checkout');
 
     Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
-
-    Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->name('payment');
 
     Route::get('/userorder', [App\Http\Controllers\OrdersController::class, 'userOrder'])->name('userorder');
 });
@@ -105,17 +115,9 @@ Route::middleware('auth')->group(function () {
 
 Route::view('/addbrand', 'addbrand');
 
-Auth::routes();
-
-Route::get('/index_displaybrands', [App\Http\Controllers\BrandController::class, 'showIndexBrands'])->name('displayindexbrands');
-
-Route::controller(ProductController::class)->group(function () {
-    Route::post('/index_redirect', 'indexRedirect')->name('indexredirect');
-    Route::get('/index_femalewatches', 'displayIndexFemaleWatch')->name('indexfemalewatch');
-    Route::get('/index_malewatches', 'displayIndexMaleWatch')->name('indexmalewatch');
-    Route::get('/index_hublot', 'displayIndexHublot')->name('indexhublot');
-    Route::get('/index_rolex', 'displayIndexRolex')->name('indexrolex');
-    Route::get('/index_audemars', 'displayIndexAudemars')->name('indexaudemars');
-    Route::get('/index_watchspec/{id}', 'getProduct');
-    Route::get('/', 'Index');
+Route::middleware('guest')->group(function () {
+    Route::get('/admin/login', [App\Http\Controllers\Auth\AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('/admin/login', [App\Http\Controllers\Auth\AdminLoginController::class, 'login'])->name('admin.login.post');
 });
+
+Auth::routes();

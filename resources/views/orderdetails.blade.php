@@ -1,45 +1,47 @@
 @extends('layouts.admin')
 
+@section('title', 'Order line items |')
+
 @section('content')
+    <div class="container-fluid czp-admin-page px-3 px-md-4 py-4">
+        <header class="czp-admin-hero">
+            <h1 class="czp-admin-hero__title">Order line items</h1>
+            <p class="czp-admin-hero__lead">Quantities and pricing captured at checkout for this order.</p>
+        </header>
 
-<div class="row justify-content-center mt-4">
-    <div class="col-sm-10 text-center">
-        <h3>Order Details</h3>
-    </div>
-</div>
-<div class="row justify-content-center">
-    <div class="col-sm-10 mb-sm-2 mt-sm-2 table-responsive">
-        <table class="table table-hover table-striped">
-            <thead class="table-dark ">
-                <tr>
-                    <th>S/N</th>
-                    <th>Detail ID</th>
-                    <th>Product ID</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                $kanta = 1;
-                @endphp
-                @foreach($orders as $detail)
-                <tr>
-                    <td>{{$kanta++ }} </td>
-                    <td>{{$detail->id}} </td>
-                    <td>{{$detail->product_id}} </td>
-                    <td>{{$detail->qty}} </td>
-                    <td>{{$detail->unit_price}} </td>
-                    <td>{{$detail->total}} </td>
-                </tr>
-                @endforeach
+        <div class="czp-admin-card">
+            <div class="czp-admin-card__body czp-admin-card__body--flush">
+                <div class="czp-admin-table-wrap">
+                    <table class="table table-bordered czp-admin-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Detail ID</th>
+                                <th>Product ID</th>
+                                <th>Qty</th>
+                                <th>Unit price</th>
+                                <th>Line total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($orders as $index => $detail)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $detail->id }}</td>
+                                    <td>{{ $detail->product_id }}</td>
+                                    <td>{{ $detail->qty }}</td>
+                                    <td>₦{{ number_format((float) $detail->unit_price, 2) }}</td>
+                                    <td><strong>₦{{ number_format((float) ($detail->total ?? ($detail->qty * $detail->unit_price)), 2) }}</strong></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-
-            </tbody>
-        </table>
+        <p class="text-center mt-4 mb-5">
+            <a href="{{ route('allorders') }}" class="btn czp-admin-btn-primary"><i class="fa-solid fa-arrow-left me-2"></i>Back to orders</a>
+        </p>
     </div>
-    <div class="text-center mb-3" style="text-decoration:underline"><a href="/allorders" class="text-primary">Back</a>
-    </div>
-</div>
 @endsection
