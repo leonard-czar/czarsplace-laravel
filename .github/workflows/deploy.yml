@@ -1,45 +1,89 @@
+# CI: runs PHPUnit on every push / PR to main.
+# CD: SSH deploy only on push to main (not on PRs). Requires repo secrets:
+#   HOST, SERVER_USERNAME, SERVER_PRIVATE_KEY
 
-name: Czarsplace CI/CD
+name: CI / CD
 
 on:
   push:
     branches:
-      - main 
+      - main
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   tests:
+    name: Tests (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2']
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up PHP
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-      - name: Run tests
-        run: |
-          # Run your tests here
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pdo, sqlite, bcmath, fileinfo, intl
+          coverage: none
+          tools: composer:v2
 
-  czarsplace-deploy:
+      - name: Composer cache
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Environment for CI
+        run: |
+          cp .env.example .env
+          php artisan key:generate --no-interaction
+
+      - name: PHPUnit
+        run: php artisan test
+
+  deploy:
+    name: Deploy (production)
     needs: tests
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy Laravel to Kali Linux server
-        uses: appleboy/ssh-action@master
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
           script: |
+            set -e
             cd /home/lebechi/www/czarsplace.cybercraftsmen.tech/czarsplace-laravel
-            composer install --no-interaction --prefer-dist --optimize-autoloader
-            php artisan optimize:clear
+            composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
             php artisan migrate --force
+            php artisan optimize:clear
             php artisan config:cache
             php artisan route:cache
-            # Add any additional deployment steps here
-
