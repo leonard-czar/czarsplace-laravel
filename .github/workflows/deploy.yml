@@ -9,6 +9,9 @@
 #                       `chown -R user:user` the app tree when root/www-data owns files
 #                       (fixes "unable to unlink ... Permission denied"). Prefer one-time
 #                       `chown` as root on the VPS or passwordless sudo for chown only.
+#   After deploy, storage/ + bootstrap/cache/ are set to user:www-data (when sudo secret
+#   is set) so php-fpm can append laravel.log. Without sudo, fix once on the VPS, e.g.:
+#   sudo chown -R lebechi:www-data storage bootstrap/cache && sudo chmod -R ug+rwx storage bootstrap/cache
 
 name: CI / CD
 
@@ -111,3 +114,14 @@ jobs:
             php artisan optimize:clear
             php artisan config:cache
             php artisan route:cache
+            mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache
+            chmod -R ug+rwx storage bootstrap/cache
+            if [ -n "${SERVER_SUDO_PASSWORD:-}" ]; then
+              for g in www-data nginx; do
+                if getent group "$g" >/dev/null 2>&1; then
+                  printf '%s\n' "$SERVER_SUDO_PASSWORD" | sudo -S -p '' chown -R "$(whoami):$g" storage bootstrap/cache
+                  chmod -R ug+rwx storage bootstrap/cache
+                  break
+                fi
+              done
+            fi
