@@ -94,10 +94,10 @@ jobs:
           script: |
             set -e
             cd /home/lebechi/www/czarsplace.cybercraftsmen.tech/czarsplace-laravel
-            # Pull latest code + composer.lock before install (otherwise server stays on old lock → PHP 8.4 errors)
+            # Match GitHub main exactly. Plain checkout/pull fails if the VPS has local edits to tracked files.
+            # -f -B recreates/resets local main to origin/main and overwrites the working tree; .env stays if gitignored.
             git fetch origin
-            git checkout main
-            git pull --ff-only origin main
+            git checkout -f -B main origin/main
             composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
             php artisan migrate --force
             php artisan optimize:clear
