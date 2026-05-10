@@ -1,6 +1,15 @@
 # CI: runs PHPUnit on every push / PR to main.
-# CD: SSH deploy only on push to main (not on PRs). Requires repo secrets:
-#   HOST, SERVER_USERNAME, SERVER_PRIVATE_KEY
+#
+# CD: SSH deploy only on push to main (not on PRs). Repo secrets:
+#   HOST              — MUST be reachable on port 22 from the public internet.
+#                       Use your VPS public IP, or a hostname whose DNS is "DNS only"
+#                       (grey cloud) in Cloudflare. If HOST is the same domain you
+#                       put behind Cloudflare "Proxied" (orange cloud), SSH often
+#                       resolves to a Cloudflare IP and you get: dial tcp …:22 i/o timeout.
+#   SERVER_USERNAME   — SSH user
+#   SERVER_PRIVATE_KEY — PEM OpenSSH private key (full key including BEGIN/END lines)
+#
+# If SSH is not on port 22, add under `with:`:  port: 2222  (or your port).
 
 name: CI / CD
 
@@ -76,9 +85,12 @@ jobs:
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1.2.2
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
+          timeout: 60s
+          command_timeout: 20m
           script: |
             set -e
             cd /home/lebechi/www/czarsplace.cybercraftsmen.tech/czarsplace-laravel
